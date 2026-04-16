@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: class structure</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-21"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#bot-e-21"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-22-text.html"><font size=-1 face="Helvetica">The classes and their relationships</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#WhatIsOO">What is Object Orientation?</a></b>
+<dd><a href="#Classes"><img src="pics/ya-down.jpg" border=0>Classes</a>
+<dd><a href="#Objects"><img src="pics/ya-down.jpg" border=0>Objects</a>
+<dd><a href="#Methods"><img src="pics/ya-down.jpg" border=0>Methods</a>
+<dd><a href="#Encapsulation"><img src="pics/ya-down.jpg" border=0>Encapsulation</a>
+<dd><a href="#Inheritance"><img src="pics/ya-down.jpg" border=0>Inheritance</a>
+<dd><a href="#Abstraction"><img src="pics/ya-down.jpg" border=0>Abstraction</a>
+</dl></font></td>
+</table>
+</center>
+
+
+<p><br><br><a name="WhatIsOO"><font face="Helvetica"><h3>What is Object Orientation?</h3></font></a>
+<dl><dd>
+This section gives a short introduction on Object Orientation, its terms and methodology.
+<p>
+<i>Object Orientation (OO)</i> is a concept for developing reusable, easy-to-handle and high-quality software components.
+<br>
+Unlike conventional software development, Object Orientation goes a different way that is more related to real-world problems.
+<p>
+Since the first serious steps in software engineering were done in the 1950's, the nature of software changed through the years.
+<br>
+As B<font size=-1>OOCH</font> describes it:
+	<dl>
+	<dd>&quot;As we look back upon the relatively brief yet colorful history of software engineering, we cannot help but notice
+	two sweeping trends:
+		<dl><dl>
+		<li>The shift in focus from programming-in-the-small to programming-in-the-large
+		<li>The evolution of high-order programming languages
+		</dl></dl>
+	<dd>Most new industrial-strength software systems are larger and more complex than their predecessors were even just a few years ago.
+	This growth in complexity has prompted a significant amount of useful applied research in software engineering,
+	particularly with regard to decomposition, abstraction, and hierarchy.
+	The development of more expressive programming languages has complemented these advances.
+	The trend has been a move away from languages that tell the computer what to do (imperative languages) toward
+	languages that describe the key abstractions in the problem domain (declarative languages).&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 26]
+	</dl>
+<p>
+The method is subdivided in several parts:
+<p>
+	<ul>
+	<li><b>Object Oriented Analysis (OOA):</b>
+	<dl>
+	<dd>&quot;A method of analysis in which requirements are examined from the perspective of the classes and objects
+	found in the vocabulary of the problem domain.&quot; [<a href="e-literature-text.html#BOO91">BOO91</a>, p. 516]
+	</dl>
+	<li><b>Object Oriented Decomposition:</b>
+	<dl>
+	<dd>&quot;The process of breaking a system into parts, each of which represents some class or object from the problem domain.
+	The application of object-oriented design methods leads to an object-oriented decomposition, in which we view the world
+	as a collection of objects that cooperate with one another to achieve some desired functionality.&quot; [<a href="e-literature-text.html#BOO91">BOO91</a>, p. 516]
+	</dl>
+	<li><b>Object Oriented Design (OOD):</b>
+	<dl>
+	<dd>&quot;A method of design encompassing the process of object-oriented decomposition and a notation for depicting both logical
+	and physical as well as static and dynamic models of the system under design; specifically, this notation
+	includes class diagrams, object diagrams, module diagrams, and process diagrams.&quot; [<a href="e-literature-text.html#BOO91">BOO91</a>, p. 516]
+	</dl>
+	<li><b>Object Oriented Programming (OOP):</b>
+	<dl>
+	<dd>&quot;A method of implementation in which programs are organized as cooperative collections of objects,
+	each of which represents an instance of some class, and whose classes are all members of a hierarchy of classes
+	united via inheritance relationships. In such programs, classes are generally viewed as static, whereas objects
+	typically have a much more dynamic nature, which is encouraged by the existence of dynamic binding and polymorphism.&quot; [<a href="e-literature-text.html#BOO91">BOO91</a>, p. 517]
+	</dl>
+	</ul>
+<p>
+While traditional structured languages were using functions and procedures that operate on (global) data,
+object oriented languages are using classes and objects that consist of methods, which operate only on their own internal data.
+<p>
+In the following, the terms of Object Orientation will be described.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Classes"><font face=Helvetica><h4>Classes</h4></font></a>
+<dl><dd>
+A class is the fundamental element in an object oriented system.
+<br>
+All classes of an object oriented system are arranged in a class hierarchy with one root class at its top.
+<p>
+C<font size=-1>AMPIONE</font> and W<font size=-1>ALRATH</font> define a class in the following way:
+	<dl>
+	<dd>&quot;A class is a blueprint or prototype that defines the variables and the methods common to all objects of a certain kind.&quot;
+	<dd>[<a href="e-literature-text.html#CW96">CW96</a>, &quot;What are classes?&quot;]
+	</dl>
+<p>
+What does that mean?
+	<dl>
+	<dd><i>blueprint:</i> A class can't do anything on its own.
+	<dd><i>defines:</i> A class provides something that can be used later.
+	<dd><i>objects:</i> A class can only be used, if it had been &quot;brought to life&quot; by instantiating it.
+	</dl>
+<p>
+Example: Class &quot;Car&quot;
+<p>
+<center>
+<img src="fig/class02.gif" border=0 width=171 height=223 alt="Picture of class Car">
+<br>
+<font size=-1>The class Car</font>
+</center>
+<p>
+As can be seen, the class, representing a car, has variables (brand, speed, gear, ...) and methods (accelerate, brake, ...).
+<br>
+This class serves as a generic description of any existing car, because each real-world thing that is a car,
+has, for example, a speed, a number of wheels, ...
+And when driving a car, you can accelerate it or change the current gear.
+<p>
+But you don't drive a generic car with <i>a number of wheels</i> at <i>a speed</i>.
+<br>
+You usually drive a specific car with, for example, <i>four wheels</i> at <i>50 mph</i>.
+<p>
+This specific car is an <i>instance</i> of the class &quot;Car&quot; and is then called an <i>object</i>.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Objects"><font face=Helvetica><h4>Objects</h4></font></a>
+<dl><dd>
+Synonym: <font face=Helvetica>instance</font>
+<p>
+B<font size=-1>OOCH</font> defines an object as
+	<dl>
+	<dd>&quot;Something you can do things to. An object has state, behavior, and identity;
+	the structure and behavior of similar objects are defined in their common class. [...]&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 516]
+	</dl>
+<p>
+What does that mean?
+	<dl>
+	<dd><i>state:</i> An object has a condition, determined by the current values of its variables.
+	<dd><i>behavior:</i> An object's state can be changed by applying a certain method.
+	<dd><i>identity:</i> Each object can be distinguished from other objects.
+	</dl>
+<p>
+Example: Object &quot;MyCar&quot;
+<p>
+<center>
+<img src="fig/obj01.gif" border=0 width=171 height=223 alt="Picture of object Car">
+<br>
+<font size=-1>An instance of a car: The object MyCar</font>
+</center>
+<p>
+The object looks similar to the class it had been instantiated from.
+This is, because the structure didn't change.
+<br>
+By applying certain values to the variables, the object MyCar has now a certain state as well as an identity.
+It is still a car, for it has the same behaviour as all other cars, which had been defined in the methods
+of their common class Car.
+<p>
+Now we have created our real-world object and are driving constantly with 50 mph.
+<br>
+After a while, we enter the highway, because we want to move faster.
+So we have to change the car's speed (change the object's state).
+<p>
+This can be done by applying one of an object's <i>methods</i>.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Methods"><font face=Helvetica><h4>Methods</h4></font></a>
+<dl><dd>
+Synonym: <font face=Helvetica>message</font>
+<p>
+B<font size=-1>OOCH</font> says, a method is
+	<dl>
+	<dd>&quot;An operation upon an object, defined as part of the declaration of a class; [...]&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 515]
+	</dl>
+<p>
+The methods, defined in a class, indicate, what the instantiated objects are able to do.
+<br>
+An object's method is called by other objects of the system.
+<p>
+As C<font size=-1>AMPIONE</font> and W<font size=-1>ALRATH</font> explain:
+	<dl>
+	<dd>&quot;Three components comprise a message: 
+		<dl>
+		<dd>1. the object to whom the message is addressed
+		<dd>2. the name of the method to perform 
+		<dd>3. any parameters needed by the method&quot;
+		</dl>
+	<dd>[<a href="e-literature-text.html#CW96">CW96</a>, &quot;What are messages?&quot;]
+	</dl>
+<p>
+As mentioned before, we want to change our car's speed.
+To achieve this, the car's driver (also an object) has to call the &quot;accelerate&quot; method:
+<p>
+<center>
+<img src="fig/met01.gif" border=0 width=459 height=221 alt="Using the accelerate method">
+<br>
+<font size=-1>Using the &quot;accelerate&quot; method of the object MyCar</font>
+</center>
+<p>
+As the figure shows, the &quot;accelerate&quot; method was called with the parameter &quot;80&quot;, which indicates
+the desired speed.
+<br>
+By applying that method, the value of the variable &quot;speed&quot; had been changed.
+You don't change the state of an object (its variables) directly.
+<p>
+The fact that variables of an object are invisible to the outside is called <i>encapsulation</i>.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Encapsulation"><font face=Helvetica><h4>Encapsulation</h4></font></a>
+<dl><dd>
+Synonym: <font face=Helvetica>information hiding</font>
+<p>
+Encapsulation is one of the most important characteristics of an object oriented system.
+<p>
+B<font size=-1>OOCH</font> describes encapsulation as
+	<dl>
+	<dd>&quot;The process of hiding all of the details of an object that do not contribute to its essential characteristics;
+	typically, the structure of an object is hidden, as well as the implementation of its methods. [...]&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 513]
+	</dl>
+<p>
+<center>
+<img src="fig/enc01.gif" border=0 width=363 height=223 alt="Encapsulation">
+<br>
+<font size=-1>Encapsulation of variables in object MyCar</font>
+</center>
+<p>
+As the figure of the object MyCar shows, all of its variables are enclosed inside the object's methods
+and may only be changed by those methods.
+<br>
+As it is, when you want to accelerate a real-world car, you don't have to know exactly how the car's engine works.
+You just have to know that you have to step on the gas pedal and change the gear.
+<p>
+This leads to an easy-to-use interface, with benefits for the user, as well as for the developer:
+	<dl><dl>
+	<li>The user doesn't have to know details of the internal structure and functionality of an object.
+	What he/she must know is, which operations can be done on the object to change its state.
+	<li>The developer can change or improve any implementation details, as long as the interface doesn't change.
+	Another advantage is that all functionality is enclosed in the same object, what makes object handling easier.
+	</dl></dl>
+<p><br>
+As mentioned before, an object oriented system consists of &quot;classes arranged in a class hierarchy&quot;.
+<br>
+One class at the top of this hierarchy serves as the base for other classes, which should have the same or additional properties.
+<p>
+This process is called <i>inheritance</i>.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Inheritance"><font face=Helvetica><h4>Inheritance</h4></font></a>
+<dl><dd>
+Inheritance is a very useful mechanism in software development, which is used to create the class hierarchy of an object oriented system.
+<p>
+B<font size=-1>OOCH</font> defines inheritance as
+	<dl>
+	<dd>&quot;A relationship among classes, wherein one class shares the structure or behavior defined in one (single inheritance)
+	or more (multiple inheritance) other classes.
+	Inheritance defines a 'kind of' hierarchy among classes in which a subclass inherits from one or more superclasses;
+	a subclass typically augments or redefines the existing structure and behavior of its superclasses.&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 514]
+	</dl>
+<p>
+<i>Note that Java does not support multiple inheritance by definition.
+Due to that fact, it will not be described here.</i>
+<p>
+Inheritance offers great advantages for software development:
+	<dl><dl>
+	<li><b>reusability:</b>
+	<br>The methods and variables once defined in a class, can be used or extended by all subclasses of that class.
+	<li><b>reliability:</b>
+	<br>Methods that worked in the superclass will also work the same way in each inherited class.
+	</dl></dl>
+<p>
+Example: Subclasses of the class &quot;Car&quot;
+<p>
+<center>
+<img src="fig/inh01.gif" border=0 width=411 height=482 alt="Subclasses of Car">
+<br>
+<font size=-1>A &quot;sports car&quot; and a &quot;truck&quot; are subclasses of the class Car</font>
+</center>
+<p>
+Although a sports car is unlike a truck, they both have something in common and thus were defined to be subclasses of a &quot;Car&quot;.
+<br>
+For example, both types have &quot;a number of wheels&quot; and also can be &quot;accelerated&quot;.
+As can be seen, only the variables and methods specific for one type had to be added in the subclass.
+<br>
+The common methods (defined in Car) may be used by instantiated objects of the subclasses and must not be rewritten.
+<br>
+By defining further subclasses, a class hierarchy arises, where classes in the lower part are more and more specialized.
+On the other hand, classes in the upper part are more generalized.
+<p>
+This leads us to another aspect of object orientation, which is called <i>abstraction</i>.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="Abstraction"><font face=Helvetica><h4>Abstraction</h4></font></a>
+<dl><dd>
+Abstraction is a very important element of object oriented software development and is used in the design phase
+to find a suitable hierarchy for a set of classes.
+<p>
+B<font size=-1>OOCH</font> describes abstraction in the following way:
+	<dl>
+	<dd>&quot;The essential characteristics of an object that distinguish it from all other kinds of objects and thus provide crisply-defined
+	conceptual boundaries relative to the perspective of the viewer;
+	the process of focusing upon the essential characteristics of an object. [...]&quot;
+	<dd>[<a href="e-literature-text.html#BOO91">BOO91</a>, p. 512]
+	</dl>
+<p>
+As the definition says, abstractions are &quot;relative to the perspective of the viewer&quot;, what means that it
+depends a lot on the problem domain for which a class structure shall be created.
+<p>
+The search for abstractions starts after the objects of the problem domain have been found in the analysis phase.
+<br>
+What follows is the most difficult and critical part of the development process, because the design of the abstraction levels
+determines the quality of the whole system.
+<p>
+Example:
+<br>
+Suppose, the result of the analysis phase were the following objects:
+	<dl><dl>
+	<li>sports car
+	<li>mountain bike
+	<li>motorcycle
+	<li>tandem
+	<li>school bus
+	<li>pickup
+	<li>Ferrari
+	<li>truck
+	<li>Lotus
+	</dl></dl>
+<p>
+Obviously, the objects represent different kinds of <b>vehicles</b>.
+By realizing that fact, we have found our first abstraction and will take a class &quot;vehicles&quot; as the base class of our hierarchy.
+<p>
+A first attempt in building a hierarchy may look like:
+<p>
+<center>
+<img src="fig/abs01.gif" border=0 width=700 height=207 alt="class hierarchy, attempt 1">
+<br>
+<font size=-1>First attempt in building a class hierarchy</font>
+</center>
+<p>
+What can be said about this hierarchy is: &quot;Don't try this at home!&quot;.
+<br>
+Although it contains all objects and therefore it's &quot;correct&quot;, it is not very intelligent.
+<br>
+An evident violation of the abstraction principle is, for example, that a &quot;sports car&quot; can be found on the
+same level as a &quot;Ferrari&quot; and a &quot;Lotus&quot;.
+This must be wrong, because they both are <i>kinds of</i> a &quot;sports car&quot;.
+<p>
+So we change our hierarchy to the following:
+<p>
+<center>
+<img src="fig/abs02.gif" border=0 width=627 height=206 alt="class hierarchy, attempt 2">
+<br>
+<font size=-1>Second attempt in building a class hierarchy</font>
+</center>
+<p>
+Now we have got a more structured hierarchy with the subclasses &quot;bikes&quot;, &quot;sports cars&quot; and &quot;transporters&quot;.
+<br>
+But they are still too specific.
+For instance, if a new object &quot;Rolls Royce&quot; is to be added to the hierarchy, where should it be inserted,
+for it is no sports car?
+<p>
+We rearrange our structure by introducing a new class &quot;cars&quot;:
+<p>
+<center>
+<img src="fig/abs03.gif" border=0 width=603 height=255 alt="class hierarchy, attempt 3">
+<br>
+<font size=-1>An important abstraction: The new class &quot;cars&quot;</font>
+</center>
+<p>
+Now there are four levels of abstraction.
+The new class &quot;cars&quot; may contain the properties that are common to all of its subclasses.
+<br>
+But there is still something wrong with our sports cars and limousines.
+<br>
+As you can see, they are arranged on the same abstraction level as, for example, a &quot;truck&quot;.
+But a truck is a more abstract thing than a Ferrari or a Rolls Royce.
+<p>
+We try to improve our hierarchy by doing another abstraction:
+<p>
+<center>
+<img src="fig/abs04.gif" border=0 width=579 height=327 alt="class hierarchy, attempt 4">
+<br>
+<font size=-1>A new abstraction: The class &quot;private motorcars&quot;</font>
+</center>
+<p>
+The fifth abstraction level had been created and our class hierarchy is now much more structured than it was at our first attempt,
+but is still far from being finished.
+<p>
+This was an example of the abstractioning process that should only demonstrate, how a class hierarchy can be built up
+and which thoughts have to be made.
+<p><br>
+The next sections consist of my class hierarchy for neural networks.
+<br>
+Because neural nets are themselves abstract things, the design process was, literally, an &quot;abstraction of abstractions&quot;
+and, unlike the previous example, took me a few more attempts to get any results.
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#top-e-21"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-22-text.html"><font size=-1 face="Helvetica">The classes and their relationships</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-21"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+
+</body>
+</HTML>

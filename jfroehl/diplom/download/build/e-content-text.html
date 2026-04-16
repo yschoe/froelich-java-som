@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: content</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-content"></a>
+<p><br>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>choose a chapter </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<br><a href="#ChapterI"><img src="pics/ya-down.jpg" border=0 halign=left><b>Chapter I: neural net overview</b></a>
+</font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<a href="#ChapterII"><img src="pics/ya-down.jpg" border=0 halign=left><b>Chapter II: class structure</b></a>
+</font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<a href="#ChapterIII"><img src="pics/ya-down.jpg" border=0 halign=left><b>Chapter III: using the classes</b></a>
+</font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<a href="#ChapterIV"><img src="pics/ya-down.jpg" border=0 halign=left><b>Chapter IV: sample applet</b></a>
+</font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<br><a href="#AppendixA"><img src="pics/ya-down.jpg" border=0 halign=left><b>Appendix A: glossary</b></a>
+</font></td>
+<tr>
+<td><font size=-1 face=Helvetica>
+<a href="#AppendixB"><img src="pics/ya-down.jpg" border=0 halign=left><b>Appendix B: literature</b></a>
+<br><br>
+</font></td>
+</table>
+</center>
+
+
+<!-- **** PREFACE **** -->
+<p><br><br>
+<font face=Helvetica><h3>Preface</h3></font>
+<dl><dd>
+In the last semester of my studies of Computer Science at the Fachhochschule Regensburg (March-July '96)
+there were two lectures I visited, because their contents seemed to be very interesting.
+<p>
+One of it was titled <b>Neural Networks</b>.
+For I always had been fascinated by <a href="e-g.html#ArtificialIntelligence">artificial intelligence</a>, I thought it could be
+a way to learn more about it, especially about the neural net theory.
+<br>
+The other one introduced the new programming language <b>Java</b>.
+That was the opportunity to get into the &quot;mystic&quot; world of <a href="e-g.html#ObjectOrientation">object orientation</a>
+I've heard of many times before, but didn't realize its advantages compared to traditional programming style.
+I should not regret my choice.
+<br>
+Besides, I was looking for a subject for my diploma that would finish my studies appropriately.
+(Of course, another management system for anything could have been written and probably never been used again,
+but that wouldn't be very motivating...)
+<p>
+The idea of &quot;Neural Net Components in an Object Oriented Class Structure&quot; appeared, when I had to do a project
+for the neural network lecture.
+I implemented the <i>Travelling Salesman Problem</i> using a Kohonen Feature Map neural net.
+Although it was written in Java, object orientation was no problem for me - because I didn't make use of it!
+So all ended up in one huge class with many unflexible methods.
+<br>
+To get some help on programming a neural net, I read several books which contained many examples,
+each suitable for just one special problem.
+However, some parts of the given source codes reappeared in other examples too.
+<br>
+In the neural networks lecture it was spoken of <i>neurons</i>, <i>weights</i> and <i>activation</i>,
+while the Java lessons introduced <i>classes</i>, <i>objects</i> and <i>methods</i> and how to write reusable
+software components.
+<br>
+And one thing lead to the other:
+Assuming that a neural net could come in handy in programs I would write later, it would be a pretty nice thing,
+if its components could be used like a construction kit instead of writing the same procedures again and again.
+<br>
+So I tried to find commonalities of different neural networks, especially the Backpropagation Net and
+the Kohonen Feature Map types, because they seem to be most useful for practical purposes.
+<p>
+The result was the Java class structure for neural net components which can be found on the following pages.
+<!--
+<p>
+It should be mentioned that this was my first attempt in developing object oriented software.
+<br>
+If you do your first steps in object orientation, you get examples like &quot;A car has four wheels&quot; or
+&quot;The speed of a car can be changed&quot;.
+But a neural net is much more abstract than a car.
+<br>
+-->
+</dl>
+
+
+<p><br><br><br>
+<center>
+<a name="ChapterI"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><p>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Chapter I </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-1.html" target=TTFrame>neural net overview</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This chapter gives general information on neural networks.
+<dd>Besides the introduction of several neural net types, the different learning algorithms, suitable for the
+different net types, are also explained.
+<dd><br>The chapter is divided into the following sections:
+</dl></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-11.html" target=TTFrame>What are neural nets?</a></b>
+<dd>The biological model: The human brain
+<dd>The components of a neural net
+<dd>What they can and where they fail
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-12.html" target=TTFrame>Types of neural nets</a></b>
+<dd>Perceptron
+<dd>Multi-Layer-Perceptron
+<dd>Backpropagation Net
+<dd>Hopfield Net
+<dd>Kohonen Feature Map
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-13.html" target=TTFrame>The learning process</a></b>
+<dd>What does &quot;learning&quot; mean refering to neural nets?
+<dd>Supervised and unsupervised learning
+<dd>Forwardpropagation
+<dd>Backpropagation
+<dd>Selforganization
+</dl></dl></font></td>
+</table>
+
+<p><br>
+<a name="ChapterII"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Chapter II </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-2.html" target=TTFrame>class structure</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This chapter shows the structure of the implemented classes.
+<dd>At the beginning you will find a description of object orientation, for I used this method
+to design the featured classes.
+<dd>After an overview of all classes and the relationships between them, each class will be explained
+in greater detail.
+<dd><br>The chapter is divided into the following sections:
+</dl></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-21.html" target=TTFrame>What is Object Orientation?</a></b>
+<dd>Classes
+<dd>Objects
+<dd>Methods
+<dd>Encapsulation
+<dd>Inheritance
+<dd>Abstraction
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-22.html" target=TTFrame>The classes and their relationships</a></b>
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-23.html" target=TTFrame>Neural net classes</a></b>
+<dd>Class NeuralNet
+<dd>Class BackpropagationNet
+<dd>Class KohonenFeatureMap
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-24.html" target=TTFrame>Common components</a></b>
+<dd>Class Neuron
+<dd>Class NeuronLayer
+<dd>Class WeightMatrix
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-25.html" target=TTFrame>Net type specific components</a></b>
+<dd>Class Pattern
+<dd>Class MapNeuron
+<dd>Class NeuronMatrix
+<dd>Class InputValue
+<dd>Class InputMatrix
+</dl></dl></font></td>
+</table>
+
+<p><br>
+<a name="ChapterIII"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Chapter III </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-3.html" target=TTFrame>using the classes</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This chapter explains how to work with the implemented classes.
+<dd>First there are a few words about Java, the language I used to implement them.
+After a description of some basic aspects of Java, it is then shown how to use the neural network classes in your own programs.
+<dd><br>The chapter is divided into the following sections:
+</dl></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-31.html" target=TTFrame>Java = new ProgrammingLanguage()</a></b>
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-32.html" target=TTFrame>Working with Java</a></b>
+<dd>The look of a class
+<dd>Creating an object
+<dd>Invoking a method
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-33.html" target=TTFrame>Using the classes in your own programs</a></b>
+<dd>Using the BackpropagationNet class
+<dd>The structure of a conversion file
+<dd>The structure of a pattern file
+<dd>Using the KohonenFeatureMap class
+<dd>Using the InputMatrix class
+</dl></dl></font></td>
+<tr>
+<td colspan=2><font size=-1 face=Helvetica><dl><dl>
+<dt><b><a href="e-34.html" target=TTFrame>Download</a></b>
+</dl></dl></font></td>
+</table>
+
+<p><br>
+<a name="ChapterIV"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Chapter IV </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-sample.html" target=TTFrame>sample applet</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This chapter presents a Java applet that uses some of the implemented classes.
+<dd>The applet demonstrates a Kohonen Feature Map that learns to span itself over a given set of points in three-dimensional space.
+Several parameters of the neural net can be changed while the example is running.
+<dd><br>You will find a more detailed description of the neural net's purpose and the applet's controls included in this page.
+</dl></td>
+</table>
+
+<p><br><br>
+<a name="AppendixA"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Appendix A </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-glossary.html" target=TTFrame>glossary</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This appendix explains expressions that are relevant in neural net theory.
+<dd>The chapters have several links to the entries on this page.
+Once you have been transferred to the glossary page that way, click the right mouse key and choose 'Back'
+to return to where you came from.
+<dd><br>Note that you can jump directly to a specific letter using the links in this page's title bar
+instead of scrolling down the whole page.
+<dd><font size=-1>(This feature is not available if you linked from inside a chapter)</font>
+</dl></td>
+</table>
+
+<p><br>
+<a name="AppendixB"></a>
+<table border=0 width="66%" cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr>
+<td align=right width="25%" bgcolor=#888888><font size=+1 face=Helvetica color=#cccccc>Appendix B </font></td>
+<td align=left width="75%" bgcolor=#f5e196><font size=+1 face=Helvetica>&nbsp; <a href="e-literature.html" target=TTFrame>literature</a></font></td>
+<tr>
+<td colspan=2><dl>
+<dd><br>This appendix shows the literature I used while developing.
+<dd>Listed are books and World Wide Web addresses, if a source is available online.
+<dd>As we all know, such addresses are changing sometimes.
+Due to that fact, I added the date of my last visit on a certain page.
+</dl></td>
+</table>
+
+<!--
+<p><br><br>
+<font size=-1>
+<b>Disclaimer:</b>
+<p>
+The HTML code and the class structure are copyright &#169; 1996-97 Jochen Fr&ouml;hlich.
+<br>Java is a registered trademark of Sun Microsystems, Inc.
+<br>Gamelan and the &quot;What's Cool&quot; logo are registered trademarks of EarthWeb, Inc.
+<br>JARS and the &quot;Top 1%&quot; logo are registered trademarks of JARS, Inc.
+<br>All other names and logos are courtesy of their respective owners.
+</font>
+-->
+</center>
+
+<p><br><br>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face="Helvetica" color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face="Helvetica">
+[<a href="e-index.html" target="_top">main page</a>]
+<b> &#183; content &#183; </b>
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</HTML>

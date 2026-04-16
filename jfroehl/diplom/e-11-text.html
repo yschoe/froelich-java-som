@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: neural net overview</title></HEAD>
+
+<body bgcolor=#c0c0c0 link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-11"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#bot-e-11"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-12-text.html"><font size=-1 face="Helvetica">Types of neural nets</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#WhatAreNeuralNets">What are neural nets?</a></b>
+<dd><a href="#TheHumanBrain"><img src="pics/ya-down.jpg" border=0>The biological model: The human brain</a>
+<dd><a href="#TheComponents"><img src="pics/ya-down.jpg" border=0>The components of a neural net</a>
+<dd><a href="#WhatTheyCan"><img src="pics/ya-down.jpg" border=0>What they can and where they fail</a>
+</dl></font></td>
+</table>
+</center>
+
+
+<!--******************************
+    WHAT ARE NEURAL NETS?
+-->
+<p><br><br><a name="WhatAreNeuralNets"><font face=Helvetica><h3>What are neural nets?</h3></font></a>
+<dl><dd>
+A neural net is an artificial representation of the human brain that tries to simulate its learning process.
+<br>
+The term &quot;artificial&quot; means that neural nets are implemented in computer programs that are able
+to handle the large number of neccessary calculations during the learning process.
+<p>
+To show where neural nets have their origin, let's have a look at the biological model: the human brain.
+</dl>
+
+
+<!--******************************
+    The biological model: The human brain
+-->
+<p><br><a name="TheHumanBrain"><font face=Helvetica><h4>The biological model: The human brain</h4></font></a>
+<dl><dd>
+The human brain consists of a large number (more than a billion) of neural cells that process informations.
+Each cell works like a simple processor and only the massive interaction between all cells and their
+parallel processing makes the brain's abilities possible.
+<p>
+Below you see a sketch of such a neural cell, called a <a href="e-g.html#Neuron">neuron</a>:
+<p>
+<center>
+<img src="fig/ncell.gif" border=0 width=372 height=247 alt="Structure of a neural cell in the human brain">
+<br><font size=-1>Structure of a neural cell in the human brain</font>
+</center>
+<p>
+As the figure indicates, a neuron consists of a core, dendrites for incoming information and an axon with dendrites
+for outgoing information that is passed to connected neurons.
+<br>
+Information is transported between neurons in form of electrical stimulations along the dendrites.
+<br>
+Incoming informations that reach the neuron's dendrites is added up and then delivered along the neuron's axon
+to the dendrites at its end, where the information is passed to other neurons if the stimulation has exceeded
+a certain <a href="e-g.html#Threshold">threshold</a>.
+In this case, the neuron is said to be <i>activated</i>.
+<br>
+If the incoming stimulation had been too low, the information will not be transported any further.
+In this case, the neuron is said to be <i>inhibited</i>.
+<p>
+The connections between the neurons are <i>adaptive</i>, what means that the connection structure is changing dynamically.
+It is commonly acknowledged that the learning ability of the human brain is based on this adaptation.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-11"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<!--******************************
+    The components of a neural net
+-->
+<p><br><a name="TheComponents"><font face=Helvetica><h4>The components of a neural net</h4></font></a>
+<dl><dd>
+Generally spoken, there are many different types of neural nets, but they all have nearly the same components.
+<br>
+If one wants to simulate the human brain using a neural net, it is obviously that some drastic simplifications
+have to be made:
+<br>
+First of all, it is impossible to &quot;copy&quot; the true parallel processing of all neural cells.
+Although there are computers that have the ability of parallel processing, the large number of processors that
+would be necessary to realize it can't be afforded by today's hardware.
+<br>
+Another limitation is that a computer's internal structure can't be changed while performing any tasks.
+<br>
+And how to implement electrical stimulations in a computer program?
+<p>
+These facts lead to an idealized model for simulation purposes.
+<br>
+Like the human brain, a neural net also consists of neurons and connections between them.
+The neurons are transporting incoming information on their outgoing connections to other neurons.
+In neural net terms these connections are called <a href="e-g.html#Weight">weights</a>.
+The &quot;electrical&quot; information is simulated with specific values stored in those weights.
+<br>
+By simply changing these weight values the changing of the connection structure can also be simulated.
+<p>
+The following figure shows an idealized neuron of a neural net.
+<p>
+<center>
+<img src="fig/neuron.gif" border=0 width=485 height=170 alt="Structure of a neuron in a neural net">
+<br><font size=-1>Structure of a neuron in a neural net</font>
+</center>
+<p>
+As you can see, an artificial neuron looks similar to a biological neural cell.
+And it works in the same way.
+<br>
+Information (called the <a href="e-g.html#Input">input</a>) is sent to the neuron on its incoming weights.
+This input is processed by a <a href="e-g.html#PropagationFunction">propagation function</a> that adds up the values of all incoming weights.
+<br>
+The resulting value is compared with a certain <a href="e-g.html#Threshold">threshold value</a>
+by the neuron's <a href="e-g.html#ActivationFunction">activation function</a>.
+If the input exceeds the threshold value, the neuron will be activated, otherwise it will be inhibited.
+<br>
+If activated, the neuron sends an <a href="e-g.html#Output">output</a> on its outgoing weights to all connected neurons and so on.
+<p>
+In a neural net, the neurons are grouped in layers, called <a href="e-g.html#NeuronLayer">neuron layers</a>.
+Usually each neuron of one layer is connected to all neurons of the preceding and the following layer
+(except the <a href="e-g.html#InputLayer">input layer</a> and the <a href="e-g.html#OutputLayer">output layer</a> of the net).
+<br>
+The information given to a neural net is propagated layer-by-layer from input layer to output layer through either
+none, one or more <a href="e-g.html#HiddenLayer">hidden layers</a>.
+Depending on the <a href="e-g.html#LearningAlgorithm">learning algorithm</a>, it is also possible that information is propagated backwards through the net.
+<p>
+The following figure shows a neural net with three neuron layers.
+<p>
+<center>
+<img src="fig/nn3.gif" border=0 width=398 height=411 alt="Neural net with three neuron layers">
+<br><font size=-1>Neural net with three neuron layers</font>
+</center>
+<p>
+Note that this is not the general structure of a neural net.
+For example, some neural net types have no hidden layers or the neurons in a layer are arranged as a matrix.
+<br>
+What's common to all neural net types is the presence of at least one <a href="e-g.html#WeightMatrix">weight matrix</a>,
+the connections between two neuron layers.
+<p>
+Next, let's see what neural nets are useful for.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-11"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<!--******************************
+    What they can and where they fail
+-->
+<p><br><a name="WhatTheyCan"><font face=Helvetica><h4>What they can and where they fail</h4></font></a>
+<dl><dd>
+Neural nets are being constructed to solve problems that can't be solved using conventional algorithms.
+<br>
+Such problems are usually optimization or classification problems.
+<p>
+The different problem domains where neural nets may be used are:
+    <ul>
+    <li>pattern association
+    <li>pattern classification
+    <li>regularity detection
+    <li>image processing
+    <li>speech analysis
+    <li>optimization problems
+    <li>robot steering
+    <li>processing of inaccurate or incomplete inputs
+    <li>quality assurance
+    <li>stock market forecasting
+    <li>simulation
+    <li><b>...</b>
+    </ul>
+<p>
+There are many different neural net types with each having special properties, so each problem domain
+has its own net type (see <a href="e-12-text.html">Types of neural nets</a> for a more detailed description).
+<br>
+Generally it can be said that neural nets are very flexible systems for problem solving purposes.
+<br>
+One ability should be mentioned explicitely: the <i>error tolerance</i> of neural networks.
+That means, if a neural net had been trained for a specific problem, it will be able to recall correct results,
+even if the problem to be solved is not exactly the same as the already learned one.
+For example, suppose a neural net had been trained to recognize human speech.
+During the learning process, a certain person has to pronounce some words, which are learned by the net.
+Then, if trained correctly, the neural net should be able to recognize those words spoken by another person, too.
+<p>
+But all that glitters ain't gold.
+Although neural nets are able to find solutions for difficult problems as listed above, the results can't be
+guaranteed to be perfect or even correct.
+They are just approximations of a desired solution and a certain <a href="e-g.html#Error">error</a> is always present.
+<br>
+Additionaly, there exist problems that can't be correctly solved by neural nets.
+An example on pattern recognition should settle this:
+<br>
+If you meet a person you saw earlier in your life, you usually will recognize him/her the second time,
+even if he/she doesn't look the same as at your first encounter.
+<br>
+Suppose now, you trained a neural net with a photograph of that person, this image will surely be recognized by the net.
+But if you add heavy noise to the picture or rotate it to some degree, the recognition will probably fail.
+<p>
+Surely, nobody would ever use a neural network in a sorting algorithm, for there exist much better and faster algorithms,
+but in problem domains, as those mentioned above, neural nets are always a good alternative to existing algorithms
+and definitely worth a try.
+</dl>
+
+
+<!--**************************************************-->
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#top-e-11"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-12-text.html"><font size=-1 face="Helvetica">Types of neural nets</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-11"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+</HTML>

@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: class structure</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-25"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-24-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Common components</font></a></td>
+<td align=center width="20%"><a href="#bot-e-25"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#SpecificComponents">Net type specific components</a></b>
+<dd><a href="#Pattern"><img src="pics/ya-down.jpg" border=0>Class Pattern</a>
+<dd><a href="#MapNeuron"><img src="pics/ya-down.jpg" border=0>Class MapNeuron</a>
+<dd><a href="#NeuronMatrix"><img src="pics/ya-down.jpg" border=0>Class NeuronMatrix</a>
+<dd><a href="#InputValue"><img src="pics/ya-down.jpg" border=0>Class InputValue</a>
+<dd><a href="#InputMatrix"><img src="pics/ya-down.jpg" border=0>Class InputMatrix</a>
+</dl></font></td>
+</table>
+</center>
+
+
+<p><br><br><a name="SpecificComponents"><font face=Helvetica><h3>Net type specific components</h3></font></a>
+<dl><dd>
+These classes represent neural net components that are specific either to the Backpropagation Net
+or the Kohonen Feature Map.
+<br>The specific class for the BackpropagationNet is: Pattern
+<br>The specific classes for the KohonenFeatureMap are: MapNeuron, NeuronMatrix, InputValue, InputMatrix
+</dl>
+
+
+<p><br><a name="Pattern"><font face=Helvetica><h4>Class Pattern</h4></font></a>
+<dl><dd>
+This class represents a pattern that contains <a href="e-g.html#Input">input</a> or target values for a neural net.
+<br>It is a specific class for <a href="e-g.html#SupervisedLearning">supervised learning</a> neural nets.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class Pattern</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-23-text.html#BackpropagationNet"><code>BackpropagationNet</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public Pattern ( String patString, String[][] conversionTable )</code>
+<br>Creates a pattern from <code>patString</code> using a <code>conversionTable</code>.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>int size ()</code><br>
+Returns the number of pattern values in a pattern.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-25"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="MapNeuron"><font face=Helvetica><h4>Class MapNeuron</h4></font></a>
+<dl><dd>
+This class represents an element of a NeuronMatrix.
+<br>It is a specific class for a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class MapNeuron</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+    <a href="e-24-text.html#Neuron">Neuron</a>
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-25-text.html#NeuronMatrix"><code>NeuronMatrix</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public MapNeuron ()</code>
+<p>
+<code>public MapNeuron ( int x, int y )</code>
+<br>Creates a map neuron with a <code>x</code> and <code>y</code> position on the feature map.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>int getXPos ()</code><br>
+Returns the x-coordinate of a map neuron's position on the map.
+<p>
+<code>int getYPos ()</code><br>
+Returns the y-coordinate of a map neuron's position on the map.
+<p>
+<code>void init ( int x, int y )</code><br>
+Initializes a map neuron's position on the map with a <code>x</code> and <code>y</code> coordinate.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-25"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="NeuronMatrix"><font face=Helvetica><h4>Class NeuronMatrix</h4></font></a>
+<dl><dd>
+This class represents the map layer of a Kohonen Feature Map.
+<br>It is a specific class for a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class NeuronMatrix</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-23-text.html#KohonenFeatureMap"><code>KohonenFeatureMap</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public NeuronMatrix ( int size )</code>
+<br>Creates a one-dimensional neuron matrix with <code>size</code> map neurons.
+<p>
+<code>public NeuronMatrix ( int xSize, int ySize )</code>
+<br>Creates a two-dimensional neuron matrix with <code>xSize*ySize</code> map neurons.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>MapNeuron[] getMapNeurons ()</code><br>
+Returns all map neurons of a neuron matrix.
+<p>
+<code>void init ( InputValue[] inputValues )</code><br>
+Initializes a neuron matrix with input values from <code>inputValues</code>.
+<p>
+<code>int size ()</code><br>
+Returns the number of map neurons in this neuron matrix.
+<p>
+<code>int xSize ()</code><br>
+Returns the number of map neurons in x-direction.
+<p>
+<code>int ySize ()</code><br>
+Returns the number of map neurons in y-direction.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-25"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="InputValue"><font face=Helvetica><h4>Class InputValue</h4></font></a>
+<dl><dd>
+This class represents an element of an InputMatrix.
+<br>It is a specific class for a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class InputValue</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-25-text.html#InputMatrix"><code>InputMatrix</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public InputValue ()</code>
+<p>
+<code>public InputValue ( int x, int y, int z )</code>
+<br>Creates an input value with <code>x</code>, <code>y</code> and <code>z</code> coordinate.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>int getX ()</code><br>
+Returns the <code>x</code> coordinate of an input value.
+<p>
+<code>int getY ()</code><br>
+Returns the <code>y</code> coordinate of an input value.
+<p>
+<code>int getZ ()</code><br>
+Returns the <code>z</code> coordinate of an input value.
+<p>
+<code>void setX ( int x )</code><br>
+Sets the <code>x</code> coordinate of an input value.
+<p>
+<code>void setY ( int y )</code><br>
+Sets the <code>y</code> coordinate of an input value.
+<p>
+<code>void setZ ( int z )</code><br>
+Sets the <code>z</code> coordinate of an input value.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-25"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="InputMatrix"><font face=Helvetica><h4>Class InputMatrix</h4></font></a>
+<dl><dd>
+This class represents the input of a Kohonen Feature Map.
+<br>Although it is called a &quot;matrix&quot;, the elements are stored in an array.
+<br>It is a specific class for a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class InputMatrix</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-23-text.html#KohonenFeatureMap"><code>KohonenFeatureMap</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public InputMatrix ( int size, int dimension )</code>
+<br>Creates an input matrix with <code>size</code> input values and <code>dimension</code> dimensions.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>int getDimension ()</code><br>
+Returns the dimension of an input matrix.
+<p>
+<code>void setInputX ( int[] inputX )</code><br>
+Initializes all x-dimension values of an input matrix with values from <code>inputX</code>.
+<p>
+<code>void setInputY ( int[] inputY )</code><br>
+Initializes all y-dimension values of an input matrix with values from <code>inputY</code>.
+<p>
+<code>void setInputZ ( int[] inputZ )</code><br>
+Initializes all z-dimension values of an input matrix with values from <code>inputZ</code>.
+<p>
+<code>void setInputValues ( int[] inputX, int[] inputY, int[] inputZ )</code><br>
+Initializes the values for all dimensions of an input matrix with values from
+<code>inputX</code>, <code>inputY</code> and <code>inputZ</code>.
+<p>
+<code>int size ()</code><br>
+Returns the number of input values in an input matrix.
+</td>
+</table>
+</center>
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-24-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Common components</font></a></td>
+<td align=center width="20%"><a href="#top-e-25"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"></td>
+</table>
+
+<p><br>
+<a name="bot-e-25"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+
+</body>
+</HTML>

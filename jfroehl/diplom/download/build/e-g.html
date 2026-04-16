@@ -1,0 +1,560 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: glossary</title></HEAD>
+
+<body bgcolor=#c0c0c0 link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-glossary"></a>
+
+<center>
+<table border=0 cellpadding=4 cellspacing=2 width="80%">
+
+<!-- **** A **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-a"><b>a</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ActivationArea"><b>activation area</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>Kohonen Feature Map</i><br>
+A value that indicates the area of influence of the most activated neuron (the center of activation) on other map neurons.
+The activation is spread out around this center (maximum activation) and decreases the greater the distance to this center is.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ActivationFunction"><b>activation function</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron</i><br>
+A mathematical function that a neuron uses to produce an output refering to its input value.
+Usually this input value has to exceed a specified <a href="#Threshold">threshold value</a> that determines, if an output
+to other neurons should be generated.
+<br>see also: <a href="#HardLimiter">hard limiter</a>,
+<a href="#SignumActivation">signum activation</a>,
+<a href="#SigmoidActivation">sigmoid activation</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="API"><b>API</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Application Programming Interface.
+<br>All classes and routines that a programming language implements.
+The API of Java is called <a href="#JDK">JDK</a>.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ArtificialIntelligence"><b>artificial intelligence (AI)</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term</i><br>
+A research discipline whose aim is to make computers able to simulate human abilities, especially the ability to learn.
+AI is separated in e.g. neural net theory, expert systems, robotics, fuzzy control systems, game theory etc.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="AWT"><b>AWT</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Abstract Window Toolkit.
+<br>Classes and routines, used to create a user interface.
+Java provides classes that are system-independent in its package <code>java.awt</code>.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Axon"><b>axon</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural cell</i><br>
+The part of a biological neural cell that contains the <a href="#Dendrite">dendrites</a>, connecting this
+neural cell to other cells.
+The incoming stimulation of a neural cell is transported from the cell's core through the axon to the
+outgoing connections.
+</td>
+
+<!-- **** B **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-b"><b>b</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="BackPropagation"><b>backpropagation</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+A learning algorithm used by neural nets with <a href="#SupervisedLearning">supervised learning</a>.
+Special form of the <a href="#DeltaLearningRule">delta learning rule</a>.
+<br>see also: <a href="#ForwardPropagation">forwardpropagation</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="BackpropagationNet"><b>Backpropagation Net</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A <a href="#FeedforwardType">feedforward type</a> neural net.
+Has one <a href="#InputLayer">input layer</a>, one <a href="#OutputLayer">output layer</a> and at least one <a href="#HiddenLayer">hidden layer</a>.
+Mainly used for pattern association.
+<br>see also: <a href="#BackPropagation">backpropagation</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Bias"><b>bias</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A &quot;pseudo&quot; <a href="#Input">input</a> of a neural net with any value except zero.
+Its purpose is to generate different inputs for different input patterns given to the net.
+</td>
+
+<!-- **** D **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-d"><b>d</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="DeltaLearningRule"><b>delta learning rule</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+A learning algorithm used by neural nets with <a href="#SupervisedLearning">supervised learning</a>.
+Effects the changing of <a href="#Weight">weights</a> by multiplying a neuron's input with the difference
+of its output and the desired output and the net's <a href="#LearningRate">learning rate</a>.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Dendrite"><b>dendrite</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural cell</i><br>
+The connections between biological neural cells.
+Electrical stimulation is transported from cell to cell using these connections.
+</td>
+
+<!-- **** E **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-e"><b>e</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Error"><b>error</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, output</i><br>
+A value that indicates the &quot;quality&quot; of a neural net's learning process.
+Used by neural nets with <a href="#SupervisedLearning">supervised learning</a>, by comparing
+the current output values with the desired output values of the net.
+The smaller the net's error is, the better the net had been trained.
+Usually the error is always a value greater than zero.
+</td>
+
+<!-- **** F **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-f"><b>f</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="FeedbackType"><b>feedback type</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A specific connection structure of a neural net, where neurons of one neuron layer may have connections
+to neurons of other layers and also to neurons of the same layer.
+An example of such a net type is the Hopfield Net.
+<br>see also: <a href="#FeedforwardType">feedforward type</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="FeedforwardType"><b>feedforward type</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A specific connection structure of a neural net, where neurons of one neuron layer may only have connections
+to neurons of other layers.
+An example of such a net type is the Perceptron.
+<br>see also: <a href="#FeedbackType">feedback type</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ForwardPropagation"><b>forwardpropagation</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+The output values of a neural net's neurons are only propagated through the net in one direction,
+from the input layer to the output layer.
+<br>see also: <a href="#BackPropagation">backpropagation</a>
+</td>
+
+<!-- **** G **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-g"><b>g</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="GUI"><b>GUI</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Graphical User Interface.
+<br>The graphical environment of a software application.
+</td>
+
+<!-- **** H **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-h"><b>h</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="HardLimiter"><b>hard limiter</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, activation function</i><br>
+A specific type of a neuron's activation function.
+<br>see also: <a href="#ActivationFunction">activation function</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="HebbLearningRule"><b>Hebb learning rule</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+A learning algorithm used by neural nets with <a href="#SupervisedLearning">supervised learning</a>,
+especially the Perceptron.
+Effects the changing of <a href="#Weight">weights</a> by multiplying a neuron's input with its output and
+the net's <a href="#LearningRate">learning rate</a>.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="HiddenLayer"><b>hidden layer</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A type of neuron layer that lies between a neural net's input and output layers.
+Called &quot;hidden&quot;, because its neuron values are not visible outside the net.
+The usage of hidden layers extends a neural net's abilities to learn logical operations.
+<br>see also: <a href="#MultiLayerPerceptron">Multi-Layer-Perceptron</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="HopfieldNet"><b>Hopfield Net</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A <a href="#FeedbackType">feedback type</a> neural net.
+Has only one &quot;layer&quot;, build of a number of neurons, where each neuron is connected to all other neurons.
+Mainly used for pattern association.
+<br>see also: <a href="#SimulatedAnnealing">simulated annealing</a>
+</td>
+
+<!-- **** I **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-i"><b>i</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Input"><b>input</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, input layer</i><br>
+A set of values, called &quot;pattern&quot;, that is passed to a neural net's input neuron layer.
+The elements of those patterns are usually binary values.
+<br>see also: <a href="#InputLayer">input layer</a>,
+<a href="#Output">output</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="InputLayer"><b>input layer</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron layer, neural net</i><br>
+The first layer of a neural net, that accepts certain input patterns and generates output values to
+the successing weight matrix.
+<br>see also: <a href="#Input">input</a>,
+<a href="#WeightMatrix">weight matrix</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="IP"><b>IP</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Internet Protocol.
+<br>A transmission protocol used to transport data across the Internet.
+</td>
+
+<!-- **** J **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-j"><b>j</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="JDK"><b>JDK</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Java Developers Kit.
+<br>An extensive set of Java classes, suitable for different purposes.
+The classes are enclosed in &quot;packages&quot;, each covering a certain topic (networking, user interface,...).
+<br>see also: <a href="#API">API</a>
+</td>
+
+<!-- **** K **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-k"><b>k</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="KohonenFeatureMap"><b>Kohonen Feature Map</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A <a href="#FeedforwardType">feedforward</a> / <a href="#FeedbackType">feedback</a> type neural net.
+Built of an input layer thats neurons are connected with each neuron of another layer, called &quot;feature map&quot;.
+The feature map can be one- or two-dimensional and each of its neurons is connected to all other neurons on the map.
+Mainly used for classification.
+<br>see also: <a href="#Selforganization">selforganization</a>
+</td>
+
+<!-- **** L **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-l"><b>l</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="LearningAlgorithm"><b>learning algorithm</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A mathematical algorithm that a neural net uses to learn specific problems.
+<br>see also: <a href="#BackPropagation">backpropagation</a>,
+<a href="#DeltaLearningRule">delta learning rule</a>,
+<a href="#ForwardPropagation">forwardpropagation</a>,
+<a href="#HebbLearningRule">Hebb learning rule</a>,
+<a href="#SimulatedAnnealing">simulated annealing</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="LearningRate"><b>learning rate</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+A changeable value used by several learning algorithms, which effects the changing of weight values.
+The greater the learning rate, the more the weight values are changed.
+Is usually decreased during the learning process.
+</td>
+
+<!-- **** M **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-m"><b>m</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="MultiLayerPerceptron"><b>Multi-Layer-Perceptron</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A <a href="#FeedforwardType">feedforward type</a> neural net.
+Built of an input layer, at least one hidden layer and one output layer.
+Mainly used for pattern association.
+<br>see also: <a href="#BackPropagation">backpropagation</a>,
+<a href="#HiddenLayer">hidden layer</a>,
+<a href="#Perceptron">Perceptron</a>
+</td>
+
+<!-- **** N **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-n"><b>n</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Neuron"><b>neuron</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron layer, neural net</i><br>
+An element of a neural net's neuron layer.
+<br>see also: <a href="#ActivationFunction">activation function</a>,
+<a href="#Threshold">threshold</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="NeuronLayer"><b>neuron layer</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A layer of a neural net.
+The different layers of a neural net are connected by weight matrices.
+<br>see also: <a href="#InputLayer">input layer</a>,
+<a href="#HiddenLayer">hidden layer</a>,
+<a href="#OutputLayer">output layer</a>,
+<a href="#WeightMatrix">weight matrix</a>
+</td>
+
+<!-- **** O **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-o"><b>o</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ObjectOrientation"><b>object orientation (OO)</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term</i><br>
+A method of software-engineering.
+The main goal of object orientation is to develope reusable software components.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Output"><b>output</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, output layer</i><br>
+A value or a set of values (pattern), generated by the neurons of a neural net's output layer.
+Used to calculate the current error value of the net.
+<br>see also: <a href="#OutputLayer">output layer</a>,
+<a href="#Input">input</a>,
+<a href="#Error">error</a>,
+<a href="#SupervisedLearning">supervised learning</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="OutputError"><b>output error</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+see <a href="#Error">error</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="OutputLayer"><b>output layer</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron layer, neural net</i><br>
+The last layer of a neural net, that produces the output value of the net.
+<br>see also: <a href="#Output">output</a>
+</td>
+
+<!-- **** P **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-p"><b>p</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Perceptron"><b>Perceptron</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+A <a href="#FeedforwardType">feedforward type</a> neural net.
+Built of one input layer and one output layer.
+Mainly used for pattern association.
+<br>see also: <a href="#MultiLayerPerceptron">Multi-Layer-Perceptron</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Propagation"><b>propagation</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, learning algorithm</i><br>
+The passing of values and errors through the different layers of a neural net during its learning process.
+<br>see also: <a href="#ForwardPropagation">forwardpropagation</a>,
+<a href="#BackPropagation">backpropagation</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="PropagationFunction"><b>propagation function</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, learning algorithm</i><br>
+A function that is used to transport values through the neurons of a neural net's layers.
+Usually, the input values are added up and passed to an activation function, which generates an output.
+<br>see also: <a href="#ForwardPropagation">forwardpropagation</a>,
+<a href="#BackPropagation">backpropagation</a>,
+<a href="#ActivationFunction">activation function</a>
+</td>
+
+<!-- **** S **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-s"><b>s</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Selforganization"><b>selforganization</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>Kohonen Feature Map, learning algorithm</i><br>
+A learning algorithm used by the Kohonen Feature Map neural net.
+During its learning process, the neurons on the net's feature map are organizing themselves depending on given input values.
+This will result in a clustered neuron structure, where neurons with similar properties (values) are arranged
+in related areas on the map.
+<br>see also: <a href="#KohonenFeatureMap">Kohonen Feature Map</a>,
+<a href="#LearningAlgorithm">learning algorithm</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="SigmoidActivation"><b>sigmoid activation</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, activation function</i><br>
+A specific type of a neuron's activation function.
+<br>see also: <a href="#ActivationFunction">activation function</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="SignumActivation"><b>signum activation</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, activation function</i><br>
+A specific type of a neuron's activation function.
+<br>see also: <a href="#ActivationFunction">activation function</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="SimulatedAnnealing"><b>simulated annealing</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>learning algorithm</i><br>
+A specific type of a learning algorithm, especially for <a href="#FeedbackType">feedback type</a> neural nets.
+<br>see also: <a href="#HopfieldNet">Hopfield Net</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="SupervisedLearning"><b>supervised learning</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, learning algorithm</i><br>
+A specific type of a learning algorithm.
+The output (pattern) of the net is compared with a target output (pattern).
+Depending on the difference between these patterns, the net error is computed.
+<br>see also: <a href="#UnsupervisedLearning">unsupervised learning</a>,
+<a href="#Error">error</a>
+</td>
+
+<!-- **** T **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-t"><b>t</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="TCP"><b>TCP</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Transmission Control Protocol.
+<br>A protocol used to transport data across the Internet.
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="ThermodynamicalModel"><b>thermodynamical model</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+Another expression for <a href="#FeedbackType">feedback type</a> neural nets.
+Called &quot;thermodynamical&quot;, because the term <i>energy</i> is used instead of <i>error</i>.
+<br>see also: <a href="#HopfieldNet">Hopfield Net</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Threshold"><b>threshold</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neuron, activation function</i><br>
+A specific value that must be exceeded by a neuron's activation function, before this neuron generates an output.
+<br>see also: <a href="#Neuron">neuron</a>,
+<a href="#ActivationFunction">activation function</a>
+</td>
+
+<!-- **** U **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-u"><b>u</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="UDP"><b>UDP</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+User Datagram Protocol.
+<br>A protocol used to transport data across the Internet in form of datagrams (small packets that are sent independently).
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="UnsupervisedLearning"><b>unsupervised learning</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, learning algorithm</i><br>
+A specific type of a learning algorithm, especially for selforganizing neural nets like the Kohonen Feature Map.
+Unlike <a href="#SupervisedLearning">supervised learning</a>, no target patterns exist.
+<br>see also: <a href="#SupervisedLearning">supervised learning</a>,
+<a href="#Selforganization">selforganization</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="URL"><b>URL</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term, abbreviation</i><br>
+Uniform Resource Locator.
+<br>An address of a certain location on the World Wide Web.
+An URL usually has the following form: <code>http://www.[servername].[country|category]</code>.
+</td>
+
+<!-- **** W **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-w"><b>w</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="Weight"><b>weight</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net, weight matrix</i><br>
+An element of a weight matrix.
+A connection between two neurons with a value that is dynamically changed during a neural net's learning process.
+<br>see also: <a href="#WeightMatrix">weight matrix</a>,
+<a href="#LearningAlgorithm">learning algorithm</a>
+</td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="WeightMatrix"><b>weight matrix</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>neural net</i><br>
+The connection structure between two neuron layers of a neural net.
+Its elements, the weights, are changed during the net's learning process.
+Each neural net has at least one weight matrix.
+<br>see also: <a href="#NeuronLayer">neuron layer</a>,
+<a href="#Weight">weight</a>
+</td>
+
+<!-- **** X **** -->
+<tr><td bgcolor=#c0c0c0 colspan=2><p><br></td>
+<tr><td bgcolor=#888888 colspan=2><font size=+1 face=Helvetica color=#f5e196><a name="g-x"><b>x</b></a></font></td>
+<tr>
+<td valign=top bgcolor=#cccccc><a name="XORProblem"><b>xor problem</b></a></td>
+<td valign=top bgcolor=#b4b4b4>
+refers to: <i>general term</i><br>
+A logical operation with the following values:
+<pre>
+x      y        XOR
+false  false    false
+false  true     true
+true   false    true
+true   true     false
+</pre>
+Due to its contradiction, this function can only be learned by neural nets with at least one hidden layer.
+<br>see also: <a href="#MultiLayerPerceptron">Multi-Layer-Perceptron</a>,
+<a href="#HiddenLayer">hidden layer</a>
+</td>
+
+</table>
+</center>
+
+
+<p><br><br>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face="Helvetica" color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face="Helvetica">
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+<b> &#183; glossary &#183; </b>
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</HTML>

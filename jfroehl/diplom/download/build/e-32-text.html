@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: using the classes</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-32"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-31-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Java = new ProgrammingLanguage()</font></a></td>
+<td align=center width="20%"><a href="#bot-e-32"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-33-text.html"><font size=-1 face="Helvetica">Using the classes in your own programs</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#WorkingWithJava">Working with Java</a></b>
+<dd><a href="#LookOfClass"><img src="pics/ya-down.jpg" border=0>The look of a class</a>
+<dd><a href="#CreatingObject"><img src="pics/ya-down.jpg" border=0>Creating an object</a>
+<dd><a href="#InvokingMethod"><img src="pics/ya-down.jpg" border=0>Invoking a method</a>
+</dl></font></td>
+</table>
+</center>
+
+
+<p><br><br><a name="WorkingWithJava"><font face="Helvetica"><h3>Working with Java</h3></font></a>
+<dl><dd>
+This section describes some basics of Java and is by no means a complete language description.
+<br>
+Assuming that you have already worked with Java, it shall only remind you of the most important things you have to know,
+when you use the neural network classes.
+<p>
+If you want to get more information about Java, I strongly recommend you to take a closer look on
+<a href="e-literature-text.html#CW96">The Java Tutorial</a>, written by Mary Campione and Kathy Walrath.
+It explains each feature of the Java language in detail, is structured very well, and had been written in an easy-to-read way.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-32"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="LookOfClass"><font face=Helvetica><h4>The look of a class</h4></font></a>
+<dl><dd>
+As we have already heard, an object-oriented system consists of a hierarchy of classes with one root class at its top.
+<br>
+The root class in the Java <a href="e-g.html#API">API</a> is the <code>Object</code> class, located in the <code>java.lang</code> package.
+It is a class with very general behaviour and all other classes inherit and extend this behaviour.
+<p>
+Now it will be shown, what a class looks like, by defining a simple class:
+<p><center>
+<img src="fig/3class01.gif" width=340 height=210 alt="A simple class" border=0>
+<br><font size=-1>A simple class</font>
+</center>
+<p>
+This simple class has a &quot;header&quot; that consists of the <i>visibility</i> (indicates, from where this class may be instantiated),
+the word <i>class</i> and a <i>name</i> for this class.
+<br>
+The &quot;body&quot; of this class only has a <i>constructor</i> that is used, when this class is instantiated.
+Each statement inside the constructor will be executed and usually contains statements that initialize variables or call methods.
+<br>
+The statement <code>super()</code> (always called implicitely) simply calls the constructor of this class' superclass.
+Because the <code>Simple</code> class is not explicitely derived from any other class by adding <code>extends [name of superclass]</code>,
+Java automatically declares the <code>Object</code> class to be the superclass.
+<br>
+If you are a C++ programmer, you are probably looking for a <i>destructor</i>. You won't find one, because, as mentioned in the previous section,
+Java automatically handles the dereferencing of objects with its <i>garbage collection</i>.
+<p>
+For this simple class is pretty useless, let's extend it to a not that simple class:
+<p><center>
+<img src="fig/3class02.gif" width=579 height=306 alt="A not that simple class" border=0>
+<br><font size=-1>A not that simple class</font>
+</center>
+<p>
+As you can see, this class is derived from the <code>Simple</code> class by adding <code>extends Simple</code> after the class name.
+Thus, our new class inherits all the functionality and behaviour of the <code>Simple</code> class, as well as of the <code>Object</code> class.
+<br>
+This class now has one <i>class variable</i> (or <i>member variable</i>) <code>value</code> and a <i>method</i> <code>getValue()</code>, which returns the variables' value.
+<br>
+The constructor has now something more to do:
+First, the superclass constructor is called by <code>super()</code> (which calls its own superclass constructor; that's inheritance!)
+and then assigns the <i>parameter</i> <code>value</code> to the class variable <code>value</code>.
+For the names of the parameter and the class variable are the same, the prefix <code>this.</code> must be added to the variable's name
+to indicate that it belongs to a variable of <i>this</i> class.
+<br>
+The <i>method</i> <code>getValue()</code> is also given a <i>visibility</i>, which indicates from where this method may be invoked.
+Giving the method a <code>public</code> visibility means that this method may be called from any other class.
+<p>
+The possible visibilities of a method, regarding to <i>same class</i>, <i>subclass</i>, <i>package</i>, and <i>world</i> are:
+	<dl><dl>
+	<li><b>public:</b> &nbsp; The method may be called from anywhere.
+	<li><b>protected:</b> &nbsp; The method may be called from anywhere but from the world.
+	<li><b>friendly:</b> &nbsp; The method may be called from inside the same class, as well as from the same package.
+	<li><b>private:</b> &nbsp; The method may be called only from inside the same class.
+	</dl></dl>
+<p>
+Now we want to use this class and thus have to create an object.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-32"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="CreatingObject"><font face=Helvetica><h4>Creating an object</h4></font></a>
+<dl><dd>
+To create an object, a Java class is instantiated by using the <code>new</code> operator.
+<br>
+So, if we want to create an object of the <code>NotThatSimple</code> class, we would have to write:
+<p><b>
+<code>&nbsp; &nbsp; NotThatSimple notThatSimpleObject = new NotThatSimple( 42 );</code>
+</b><p>
+This statement creates a new <code>NotThatSimple</code> object and performs the following three actions:
+	<ol>
+	<li>declaration,
+	<li>instantiation (object creation), and
+	<li>initialization.
+	</ol>
+<p>
+<font face=Helvetica>Declaration</font><p>
+	<dl><dd>
+	The declaration part could have been written separately by writing:
+	<br>
+	<code>&nbsp; &nbsp; NotThatSimple notThatSimpleObject;</code>
+	<p>
+	This statement only creates a variable named <code>notThatSimpleObject</code> to hold an object of type <code>NotThatSimple</code>,
+	but <b>does not instantiate it</b>.
+	<br>
+	As it is common use in Java (and the Style Guide fanatic I am), I will use names that begin with an uppercase letter for class names and a lowercase letter for object names.
+	</dl>
+<p>
+<font face=Helvetica>Instantiation</font><p>
+	<dl><dd>
+	The object is instantiated by the <code>new</code> operator, followed by a class constructor call.
+	<br>
+	The instantiation part is the following statement:
+	<br>
+	<code>&nbsp; &nbsp; new NotThatSimple( 42 );</code>
+	<p>
+	The <code>new</code> operator creates an object and returns a reference to that object:
+	<br>
+	<code>&nbsp; &nbsp; notThatSimpleObject = new NotThatSimple( 42 );</code>
+	<p>
+	Note that before you can write the object instantiation in this form, you <b>must</b> have declared <code>notThatSimpleObject</code>
+	to be of type <code>NotThatSimple</code> earlier.
+	Otherwise, you'll get an exception (error), every Java programmer is familiar with: the <b><code>NullPointerException</code></b>.
+	</dl>
+<p>
+<font face=Helvetica>Initialization</font><p>
+	<dl><dd>
+	The initialization of an object is done by the class constructor call after the <code>new</code> operator:
+	<br>
+	<code>&nbsp; &nbsp; NotThatSimple( 42 );</code>
+	<p>
+	Each class has at least one constructor, which can easily be distinguished from a method, because it has
+	the same name as the class and has no return type.
+	<br>
+	Our <code>NotThatSimple</code> class has only one constructor that takes one integer as an argument (the number &quot;42&quot; in the example).
+	</dl>
+<p>[see <a href="e-literature-text.html#CW96">CW96</a>, &quot;Creating Objects&quot;]
+<p><br>
+Now we have got our object <code>notThatSimpleObject</code> we can work with.
+<p>
+As mentioned in the previous chapter, an object has <i>state</i>, <i>behaviour</i>, and <i>identity</i>.
+<br>
+The state of our object is determined by the current value of the variable <code>value</code>.
+To make clear that a variable belongs to an object (instance of a class), it is explicitely called <i>instance variable</i>.
+<br>
+The object's behaviour is determined by the methods it (or any of its superclasses) can perform.
+Our object has only one method <code>getValue()</code>, which may be used to get the object's current state.
+<br>
+And finally, our object also has an identity, determined by the object's name.
+<p>
+As we heard before, a class serves as a &quot;blueprint&quot; for similar objects.
+<br>
+This means, we are free to create as many objects of the <code>NotThatSimple</code> type as we want.
+For example, the statement
+<br>
+<code>&nbsp; &nbsp; NotThatSimple similarObject = new NotThatSimple( 27 );</code>
+<br>
+creates another object that is similar to the <code>notThatSimpleObject</code>.
+It has the same behaviour, because it is also of the <code>NotThatSimple</code> type, but its state and identity are different.
+<p>
+Now, if we want to change the state of an object, we have to call its methods.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-32"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="InvokingMethod"><font face=Helvetica><h4>Invoking a method</h4></font></a>
+<dl><dd>
+An object's method is called by using a statement of the following form:
+<br>
+<code>&nbsp; &nbsp; notThatSimpleObject.getValue();</code>
+<p>
+To specify, which object's method you want to call, the name of that object must be written.
+After the object's name, the name of the method follows.
+<br>
+To call the same method, but now for <code>similarObject</code>, you would have to write:
+<br>
+<code>&nbsp; &nbsp; similarObject.getValue();</code>
+<p>
+(Do you remember the term <i>reusability</i>, mentioned in the &quot;Object Orientation&quot; section?)
+<p>
+Our example class offers no way to change our objects' states, but we may get some information about the states.
+The <code>getValue()</code> method returns an integer value, which represents an object's current state.
+<br>
+Thus, if you want to get the state of <code>similarObject</code>, you might write something like:
+<br>
+<code>
+&nbsp; &nbsp; int currentState;
+<br>
+&nbsp; &nbsp; currentState = similarObject.getValue();
+</code>
+<p>
+Of course, the variable that receives the return value must be of the same type as the returned value.
+
+<p><br>
+After this short description of some Java basics, let's go on to the serious stuff.
+<br>
+The next section shows you, how to work with the neural network classes.
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-31-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Java = new ProgrammingLanguage()</font></a></td>
+<td align=center width="20%"><a href="#top-e-32"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-33-text.html"><font size=-1 face="Helvetica">Using the classes in your own programs</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-32"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face="Helvetica" color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face="Helvetica">
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+
+</body>
+</HTML>

@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: sample applet control</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-samplecontrol"></a>
+<p>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="60%"></td>
+<td align=right width="40%"><a href="e-sample-description.html"><font size=-1 face="Helvetica">Description</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<font size=+1 face="Helvetica">Control</font>
+<p>
+<table border=0 cellpadding=2 width="100%">
+<tr>
+<td colspan=2><font face="Helvetica"><b>Applet window</b></font><br><br></td>
+<tr>
+<td align=left valign=top><b>[Start learning]</b></td>
+<td align=left valign=top>
+Starts the learning process.
+</td>
+<tr>
+<td align=left valign=top><b>[Stop learning]</b></td>
+<td align=left valign=top>
+Stops the learning process.
+</td>
+<tr>
+<td align=left valign=top><b>[Reset]</b></td>
+<td align=left valign=top>
+Resets the net with the current parameters values.
+</td>
+<tr>
+<td align=left valign=top><b>[Parameters]</b></td>
+<td align=left valign=top>
+Displays a window where the net parameters can be changed.
+</td>
+<tr>
+<td align=left valign=top><b>[Exit]</b></td>
+<td align=left valign=top>
+Terminates this applet.
+</td>
+<tr>
+<td align=left valign=top><b>input values</b></td>
+<td align=left valign=top>
+The number of the net's input values.
+<br>Displayed as <font color="#0000FF">blue</font> points.
+<br><small>Value may be changed by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>input layer</b></td>
+<td align=left valign=top>
+The number of neurons in the input layer.
+<br><small>Value may be changed by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>map size</b></td>
+<td align=left valign=top>
+The size of the feature map.
+<br>Displayed as a black line or grid.
+<br><small>Value may be changed by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>weights</b></td>
+<td align=left valign=top>
+The number of connections between input layer and feature map.
+</td>
+<tr>
+<td align=left valign=top><b>learning cycle</b></td>
+<td align=left valign=top>
+The current learning cycle of the net.
+<br><small>Final cycle may be set by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>learning rate</b></td>
+<td align=left valign=top>
+The current learning rate of the net.
+<br><small>Initial value may be set by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>activation area</b></td>
+<td align=left valign=top>
+The current activation area of the feature map.
+<br><small>Initial and final values may be set by Parameters.</small>
+</td>
+<tr>
+<td align=left valign=top><b>elapsed time</b></td>
+<td align=left valign=top>
+The current learning time of the net.
+</td>
+
+<tr>
+<td colspan=2><p><br><font face="Helvetica"><b>Parameters window</b></font><br><br></td>
+<tr>
+<td align=left valign=top><b>[Apply]</b></td>
+<td align=left valign=top>
+Accepts the contents of all parameter fields as current parameters.
+<br>After this button has been clicked, you must &quot;Reset&quot; the net.
+</td>
+<tr>
+<td align=left valign=top><b>[Set defaults]</b></td>
+<td align=left valign=top>
+Assigns the default parameters to the parameter fields.
+</td>
+<tr>
+<td align=left valign=top><b>[Hide]</b></td>
+<td align=left valign=top>
+Hides the Parameters window.
+</td>
+<tr>
+<td align=left valign=top><b>input values</b></td>
+<td align=left valign=top>
+The number of the net's input values.
+<br>The feature map tries to span itself over all input values.
+<br>Input values have random positions and are displayed as <font color="#0000FF">blue</font> points.
+<br><small>default: 10</small>
+</td>
+<tr>
+<td align=left valign=top><b>map size (x/y)</b></td>
+<td align=left valign=top>
+The size of the feature map in x- and y-dimension.
+<br><b>Hint:</b> If you want a one-dimensional map, it's a bit faster to set the x-value to 1 and the y-value to the size of the map.
+<br>The feature map is displayed as a black line or grid (depending on the dimension).
+<br><small>default: x: 9, y: 9</small>
+</td>
+<tr>
+<td align=left valign=top><b>input neurons</b></td>
+<td align=left valign=top>
+The number of neurons in the input layer.
+<br>Determines the dimension of the input values.
+<br><small>default: 3</small>
+</td>
+<tr>
+<td align=left valign=top><b>initial learning rate</b></td>
+<td align=left valign=top>
+The learning rate with which the net starts its learning process.
+<br>Should be between 0.5 and 1.0.
+<br>If the value is too low, the net might not be able to learn correctly.
+<br><small>default: 0.6</small>
+</td>
+<tr>
+<td align=left valign=top><b>initial activation area</b></td>
+<td align=left valign=top>
+The area of activation with which the net starts its learning process.
+<br>Should be at least the greater of both map size values divided by 4.
+<br>If the value is too low, the net might not be able to learn correctly.
+<br>If the value is too big, the learning time might extend unneccessarily.
+<br><small>default: 3.0</small>
+</td>
+<tr>
+<td align=left valign=top><b>stop, if area is smaller than</b></td>
+<td align=left valign=top>
+If the area of activation is smaller than this value, the net stops learning.
+<br>The smaller this value is, the more precisely the net learns.
+<br>Must be greater than 0 and smaller than the initial activation area.
+<br><small>default: 0.5</small>
+</td>
+<tr>
+<td align=left valign=top><b>stop at learning cycle</b></td>
+<td align=left valign=top>
+The number of the learning cycle at which the net stops learning.
+<br>If the area of activation is at its minimum value before the specified learning cycle has been reached, the net stops learning.
+<br>A value of -1 means that the net has no maximum learning cycle.
+<br><small>default: -1 (infinite)</small>
+</td>
+<tr>
+<td align=left valign=top><b>input range (x/y/z)</b></td>
+<td align=left valign=top>
+The possible ranges of the input values in x-, y- and z-dimension.
+<br>If the input values are 2-dimensional, the z-range is automatically set to 1.
+<br>The input ranges are displayed as a <font color="#777777">gray</font> bounding box.
+<br><small>default: x: 120, y: 120, z: 120</small>
+</td>
+<tr>
+<td align=left valign=top><b>x-axis rotation speed</b></td>
+<td align=left valign=top>
+The speed with which the net rotates around the x-axis.
+<br><small>default: 1</small>
+</td>
+<tr>
+<td align=left valign=top><b>y-axis rotation speed</b></td>
+<td align=left valign=top>
+The speed with which the net rotates around the y-axis.
+<br><small>default: 2</small>
+</td>
+<tr>
+<td align=left valign=top><b>z-axis rotation speed</b></td>
+<td align=left valign=top>
+The speed with which the net rotates around the z-axis.
+<br><small>default: -4</small>
+</td>
+<tr>
+<td align=left valign=top><b>display step</b></td>
+<td align=left valign=top>
+The net will be redrawn every 'display step'-th learning cycle.
+<br><small>default: 1</small>
+</td>
+</table>
+
+<p>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="60%"></td>
+<td align=right width="40%"><a href="e-sample-description.html"><font size=-1 face="Helvetica">Description</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<center><div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div></center>
+</body>
+</HTML>

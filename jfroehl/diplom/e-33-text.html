@@ -1,0 +1,773 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: using the classes</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-33"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-32-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Working with Java</font></a></td>
+<td align=center width="20%"><a href="#bot-e-33"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-34-text.html"><font size=-1 face="Helvetica">Download</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#UsingTheClasses">Using the classes in your own programs</a></b>
+<dd><a href="#UsingBPN"><img src="pics/ya-down.jpg" border=0>Using the BackpropagationNet class</a>
+<dd><a href="#ConversionFile"><img src="pics/ya-down.jpg" border=0>The structure of a conversion file</a>
+<dd><a href="#PatternFile"><img src="pics/ya-down.jpg" border=0>The structure of a pattern file</a>
+<dd><a href="#UsingKFM"><img src="pics/ya-down.jpg" border=0>Using the KohonenFeatureMap class</a>
+<dd><a href="#UsingIM"><img src="pics/ya-down.jpg" border=0>Using the InputMatrix class</a>
+</dl></font></td>
+</table>
+</center>
+
+<p><br>
+<a name="UsingTheClasses"><font face="Helvetica"><h3>Using the classes in your own programs</h3></font></a>
+<dl><dd>
+This section explains, how you can use the neural network classes in your own programs.
+<p>
+While designing the classes, I asked myself, what would be the <b>easiest</b> way to build a neural net?
+<br>
+I remembered the neural net lessons, where my professor used to say things like:
+<dl><dd>
+&quot;Now we want to build a 3-layered Backpropagation Net with 4 neurons in its input layer and 3 neurons in its output layer.
+The hidden layer consists of 2 neurons.
+Each neuron of one layer is connected to all neurons of the following layer...&quot;
+</dl>
+<p>
+While he said this, he drew a sketch of the net on the blackboard in the following way:
+    <ol>
+    <li>He drew the neurons of the input layer
+    <li>He drew the neurons of the hidden layer
+    <li>He drew the neurons of the output layer
+    <li>He connected the input neurons with the hidden neurons
+    <li>He connected the hidden neurons with the output neurons
+    <li>He assigned random values to the weights of both weight matrices
+    <li>He wrote down the input and target patterns
+    <li>He demonstrated a few learning cycles of the net
+    </ol>
+<p>
+For this procedure was always the same, and only the net structure changed, it seemed to be a possible solution for an implementation.
+<br>
+So I came to the conclusion, building a neural net in a program should be done the same way as you would describe it with your own words.
+<p>
+The whole class structure consists of 11 classes, as can be seen in <a href="e-22-text.html">class structure/The classes and their relationships</a>,
+but you actually need to know more about only three of them to get your neural net running.
+<br>
+The classes you explicitely use in your programs are: BackpropagationNet, KohonenFeatureMap, and InputMatrix.
+</dl>
+
+
+<p><br><a name="UsingBPN"><font face="Helvetica"><h4>Using the BackpropagationNet class</h4></font></a>
+<dl><dd>
+<center>
+<table border=1 cellpadding=2 width="60%">
+<tr>
+<td align=center valign=top colspan=2><font size=+1>Features of the BackpropagationNet class</font></td>
+<tr>
+<td valign=top width="33%"><b>number of neuron layers</b></td>
+<td valign=top>minimum: 2, maximum: N</td>
+<tr>
+<td valign=top width="33%"><b>number of neurons in each layer</b></td>
+<td valign=top>minimum: 1, maximum: N</td>
+<tr>
+<td valign=top width="33%"><b>weight matrices</b></td>
+<td valign=top>automatically created and initialized<br>
+The weights are connecting the neurons of two consecutive layers
+</td>
+<tr>
+<td valign=top width="33%"><b>bias values</b></td>
+<td valign=top>automatically used</td>
+<tr>
+<td valign=top width="33%"><b>number of input/target patterns</b></td>
+<td valign=top>minimum: 1, maximum: N</td>
+<tr>
+<td valign=top width="33%"><b>one learning step includes</b></td>
+<td valign=top>forward propagation and backpropagation of all input patterns
+(<i>learning-by-epoch</i>), changing of the weights</td>
+</table>
+
+<p>
+<table border=1 cellpadding=2 width="90%">
+<tr><td align=center colspan=3><font size=+1>Steps to create a Backpropagation Net</font></td>
+<tr><th valign=top>step</th><th valign=top>sample code</th><th valign=top>description</th>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>1. object declaration</b></td>
+<td valign=top bgcolor=#d0d0d0><code>BackpropagationNet bpn;</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Declares the object <i>bpn</i> to be of type BackpropagationNet.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>2. constructor call</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn = new BackpropagationNet();</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates an instance of BackpropagationNet.
+This is the only constructor of the class and takes no arguments.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>3. read conversion file</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.readConversionFile(&quot;fileName&quot;);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Reads the ASCII-binary conversion file.
+<br>See <a href="#ConversionFile"><font face=Helvetica>The structure of a conversion file</font></a> below for further explanation of conversion files.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>4. create input layer</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.addNeuronLayer(i);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates the net's input layer with <i>i</i> neurons.
+<br><b>The neuron layers are sequentially added to the net structure!</b>
+</td>
+<tr>
+<td valign=top><b>create hidden layer(s)</b></td>
+<td valign=top><code>bpn.addNeuronLayer(h);</code></td>
+<td valign=top><b>optional</b><br>
+Creates the net's hidden layer(s) with <i>h</i> neurons.
+This step is optional (if your net should have no hidden layers) or may be done one or more times (if your net has one or more hidden layers).
+If your net has more than one hidden layers, the number of neurons in each layer must not always be the same.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>5. create output layer</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.addNeuronLayer(o);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates the net's output layer with <i>o</i> neurons.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>6. connect all layers</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.connectLayers();</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Connects the neurons of all consecutive layers.
+All weight matrices are created and initialized with random values.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>7. read pattern file</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.readPatternFile(&quot;fileName&quot;);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Reads the pattern file that contains the input and target patterns.
+<br>See <a href="#PatternFile"><font face=Helvetica>The structure of a pattern file</font></a> below for further explanation of pattern files.
+</td>
+<tr>
+<td valign=top><b>set learning rate</b></td>
+<td valign=top><code>bpn.setLearningRate(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's learning rate to <i>x</i>.
+</td>
+<tr>
+<td valign=top><b>set minimum error</b></td>
+<td valign=top><code>bpn.setMinimumError(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's minimum error to <i>x</i>.
+The net learns, until its error is smaller than this value.
+</td>
+<tr>
+<td valign=top><b>set accuracy</b></td>
+<td valign=top><code>bpn.setAccuracy(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's accuracy value to <i>x</i>.
+</td>
+<tr>
+<td valign=top><b>set maximum learning cycles</b></td>
+<td valign=top><code>bpn.setMaxLearningCycles(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the maximum number of learning cycles to <i>x</i>.
+The default value is -1 (no maximum).
+</td>
+<tr>
+<td valign=top><b>reset learning time</b></td>
+<td valign=top><code>bpn.resetTime();</code></td>
+<td valign=top><b>optional</b><br>
+Resets the learning time.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>8. perform a learning cycle</b></td>
+<td valign=top bgcolor=#d0d0d0><code>bpn.learn();</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Performs one learning cycle.
+<br>
+This method is usually called within a loop, which exits, if the <code>finishedLearning()</code> method returns true.
+</td>
+<tr>
+<td valign=top><b>recall a pattern</b></td>
+<td valign=top><code>bpn.recall(&quot;inputPattern&quot;);</code></td>
+<td valign=top><b>optional</b><br>
+Tries to recall the correct output of the input pattern <i>inputPattern</i>.
+</td>
+
+<tr><td colspan=3><p><br><b>information is available on:</b></td>
+<tr>
+<td valign=top><b>accuracy</b></td>
+<td valign=top><code>bpn.getAccuracy();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the accuracy value of the net.
+</td>
+<tr>
+<td valign=top><b>elapsed time</b></td>
+<td valign=top><code>bpn.getElapsedTime();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the time that elapsed since the learning process started.
+</td>
+<tr>
+<td valign=top><b>input pattern</b></td>
+<td valign=top><code>bpn.getInputPattern(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the input pattern with number <i>i</i>.
+<br><b>Pattern numbers start with zero!</b>
+</td>
+<tr>
+<td valign=top><b>learning cycle</b></td>
+<td valign=top><code>bpn.getLearningCycle();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the current learning cycle of the net.
+</td>
+<tr>
+<td valign=top><b>learning rate</b></td>
+<td valign=top><code>bpn.getLearningRate();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the learning rate of the net.
+</td>
+<tr>
+<td valign=top><b>minimum error</b></td>
+<td valign=top><code>bpn.getMinimumError();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the minimum error of the net.
+</td>
+<tr>
+<td valign=top><b>net error</b></td>
+<td valign=top><code>bpn.getError();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the current error of the net.
+</td>
+<tr>
+<td valign=top><b>neuron outputs</b></td>
+<td valign=top><code>bpn.getNeuronOutputs(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the output values of all neurons in layer <i>i</i>.
+</td>
+<tr>
+<td valign=top><b>number of layers</b></td>
+<td valign=top><code>bpn.getNumberOfLayers();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of neuron layers.
+</td>
+<tr>
+<td valign=top><b>number of neurons</b></td>
+<td valign=top><code>bpn.getNumberOfNeurons(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of neurons in layer <i>i</i>.
+<br><b>Neuron layer numbers start with zero!</b>
+</td>
+<tr>
+<td valign=top><b>number of patterns</b></td>
+<td valign=top><code>bpn.getNumberOfPatterns();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of input/target patterns.
+</td>
+<tr>
+<td valign=top><b>number of all weights</b></td>
+<td valign=top><code>bpn.getNumberOfWeights();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of all weights.
+</td>
+<tr>
+<td valign=top><b>number of weights</b></td>
+<td valign=top><code>bpn.getNumberOfWeights(m);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of weights in weight matrix <i>m</i>.
+</td>
+<tr>
+<td valign=top><b>output pattern</b></td>
+<td valign=top><code>bpn.getOutputPattern(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the output pattern with number <i>i</i>.
+<br><b>Pattern numbers start with zero!</b>
+</td>
+<tr>
+<td valign=top><b>pattern error</b></td>
+<td valign=top><code>bpn.getPatternError(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the error of the output pattern with number <i>i</i>.
+<br><b>Pattern numbers start with zero!</b>
+</td>
+<tr>
+<td valign=top><b>target pattern</b></td>
+<td valign=top><code>bpn.getTargetPattern(i);</code></td>
+<td valign=top><b>optional</b><br>
+Returns the target pattern with number <i>i</i>.
+<br><b>Pattern numbers start with zero!</b>
+</td>
+<tr>
+<td valign=top><b>weight values</b></td>
+<td valign=top><code>bpn.getWeightValues(m);</code></td>
+<td valign=top><b>optional</b><br>
+Returns all weight values of weight matrix <i>m</i>.
+<br><b>Weight matrix numbers start with zero!</b>
+</td>
+</table>
+</center>
+<p>
+Here is the source code of the BPN Application to show you an example: <a href="BPN.java">BPN.java</a>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-33"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="ConversionFile"><font face="Helvetica"><h4>The structure of a conversion file</h4></font></a>
+<dl><dd>
+The conversion file of a Backpropagation Net <b>must be used</b> to convert ASCII characters (the net input)
+to an internal binary representation.
+<br>
+The number of binary values that represent the ASCII characters can be changed freely, but has to be the same for each character.
+<p>
+The general structure of a conversion file is as follows:
+<pre>
+  in the first line:    number of conversions
+
+  each following line:  at first position: the ASCII character
+  and then:             the binary representation
+                        (the length of this representation doesn't matter,
+                        but must be the same for each conversion)
+</pre>
+
+<p><br>
+Below you see the conversion file &quot;ascii2bin.cnv&quot; that is used in the <a href="BPN.java">BPN application</a>.
+<br>
+It contains 64 conversions (as can be seen in the first line) and each ASCII character is converted to 6 binary digits.
+<p>
+<dl><dd>
+<pre>
+64
+0000000
+1000001
+2000010
+3000011
+4000100
+5000101
+6000110
+7000111
+8001000
+9001001
+a001010
+b001011
+c001100
+d001101
+e001110
+f001111
+g010000
+h010001
+i010010
+j010011
+k010100
+l010101
+m010110
+n010111
+o011000
+p011001
+q011010
+r011011
+s011100
+t011101
+u011110
+v011111
+w100000
+x100001
+y100010
+z100011
+A100100
+B100101
+C100110
+D100111
+E101000
+F101001
+G101010
+H101011
+I101100
+J101101
+K101110
+L101111
+M110000
+N110001
+O110010
+P110011
+Q110100
+R110101
+S110110
+T110111
+U111000
+V111001
+W111010
+X111011
+Y111100
+Z111101
+?111110
+?111111
+</pre>
+</dl>
+<p>
+<b>Note:</b> A conversion file must be read <b>before</b> you add neuron layers to the net, because the number of binary digits
+must already be available when a neuron layer is created.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-33"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="PatternFile"><font face="Helvetica"><h4>The structure of a pattern file</h4></font></a>
+<dl><dd>
+The pattern file of a Backpropagation Net contains the input and target patterns for the net.
+<br>
+The patterns should contain ASCII characters that are defined in the net's conversion file.
+<br>
+The number of patterns can be changed freely.
+<br>
+The length of an input pattern must be the same as the number of neurons in the net's input neuron layer.
+<br>
+The length of a target pattern must be the same as the number of neurons in the net's output neuron layer.
+<p>
+The general structure of a pattern file is as follows:
+<pre>
+  in the first line:    number of patterns
+  in the second line:   length of input patterns (same as number of neurons in input layer)
+  in the third line:    length of target patterns (same as number of neurons in output layer)
+
+  each following line:  the input pattern [whitespace] the target pattern
+</pre>
+
+<p><br>
+Below you see the pattern file &quot;towns.pat&quot; that is used in the <a href="BPN.java">BPN application</a>.
+<br>
+It contains 15 patterns (first line).
+Each input pattern consists of 10 ASCII characters (second line) and each target pattern consists of 7 characters (third line).
+<p>
+<dl><dd>
+<pre>
+15
+10
+7
+Bonn000000 Germany
+Brasilia00 Brasil0
+Brussels00 Belgium
+Helsinki00 Finland
+London0000 England
+Madrid0000 Spain00
+Moscow0000 Russia0
+New0Delhi0 India00
+Oslo000000 Norway0
+Paris00000 France0
+Rome000000 Italy00
+Stockholm0 Sweden0
+Tokyo00000 Japan00
+Vienna0000 Austria
+Washington USA0000
+</pre>
+</dl>
+<p>
+<b>Note:</b> A pattern file must be read <b>after</b> the <code>connectLayers()</code> had been called.
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-33"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="UsingKFM"><font face="Helvetica"><h4>Using the KohonenFeatureMap class</h4></font></a>
+<dl><dd>
+<center>
+<table border=1 cellpadding=2 width="60%">
+<tr>
+<td align=center valign=top colspan=2><font size=+1>Features of the KohonenFeatureMap class</font></td>
+<tr>
+<td valign=top width="33%"><b>number of neuron layers</b></td>
+<td valign=top>1 input layer, 1 feature map</td>
+<tr>
+<td valign=top width="33%"><b>input dimension</b></td>
+<td valign=top>minimum: 1, maximum: 3</td>
+<tr>
+<td valign=top width="33%"><b>number of neurons in feature map</b></td>
+<td valign=top>minimum: 1*1, maximum: N*M</td>
+<tr>
+<td valign=top width="33%"><b>number of input values</b></td>
+<td valign=top>minimum: 1, maximum: N</td>
+<tr>
+<td valign=top width="33%"><b>weight matrices</b></td>
+<td valign=top>automatically created and initialized<br>One matrix connects input layer and feature map.
+The other matrix is not of the <code>WeightMatrix</code> type and connects the neurons of the feature map among themselves.</td>
+<tr>
+<td valign=top width="33%"><b>biases</b></td>
+<td valign=top>not used</td>
+<tr>
+<td valign=top width="33%"><b>one learning step includes</b></td>
+<td valign=top>selection of a random input value, finding the most activated map neuron, changing of the weights</td>
+</table>
+
+<p>
+<table border=1 cellpadding=2 width="90%">
+<tr><td align=center colspan=3><font size=+1>Steps to create a Kohonen Feature Map</font></td>
+<tr><th valign=top>step</th><th valign=top>sample code</th><th valign=top>description</th>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>1. object declaration</b></td>
+<td valign=top bgcolor=#d0d0d0><code>KohonenFeatureMap kfm;</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Declares the object <i>kfm</i> to be of type KohonenFeatureMap.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>2. constructor call</b></td>
+<td valign=top bgcolor=#d0d0d0><code>kfm = new KohonenFeatureMap();</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates an instance of KohonenFeatureMap.
+This is the only constructor of the class and takes no arguments.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>3. create feature map</b></td>
+<td valign=top bgcolor=#d0d0d0><code>kfm.createMapLayer(xSize,ySize);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates the net's feature map with <i>xSize*ySize</i> map neurons.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>4. define input matrix</b></td>
+<td valign=top bgcolor=#d0d0d0>see <font face=Helvetica><a href="#UsingIM">Using the InputMatrix class</a></font></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates the input matrix.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>5. connect input layer with feature map</b></td>
+<td valign=top bgcolor=#d0d0d0><code>kfm.connectLayers(im);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Connects each input neuron (automatically created, depending on the dimension of the input matrix <i>im</i>) with each neuron of the feature map.
+Besides, all map neurons are connected among themselves.
+All weight matrices are created and initialized with random values, taken from the input matrix <i>im</i> (created in step 4).
+</td>
+<tr>
+<td valign=top><b>set initial learning rate</b></td>
+<td valign=top><code>kfm.setInitLearningRate(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's initial learning rate to <i>x</i>.
+The default value is 0.6.
+</td>
+<tr>
+<td valign=top><b>set initial activation area</b></td>
+<td valign=top><code>kfm.setInitActivationArea(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's initial activation area to <i>x</i>.
+The default value is the greater of both map sizes divided by 2.
+</td>
+<tr>
+<td valign=top><b>set final activation area</b></td>
+<td valign=top><code>kfm.setStopArea(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the net's final activation area to <i>x</i>.
+The default value is initActivationArea divided by 10.
+</td>
+<tr>
+<td valign=top><b>set maximum learning cycles</b></td>
+<td valign=top><code>kfm.setMaxLearningCycles(x);</code></td>
+<td valign=top><b>optional</b><br>
+Sets the maximum number of learning cycles to <i>x</i>.
+The default value is -1 (no maximum).
+</td>
+<tr>
+<td valign=top><b>reset learning time</b></td>
+<td valign=top><code>kfm.resetTime();</code></td>
+<td valign=top><b>optional</b><br>
+Resets the learning time.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>6. perform a learning cycle</b></td>
+<td valign=top bgcolor=#d0d0d0><code>kfm.learn();</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Performs one learning cycle.
+<br>
+This method is usually called within a loop, which exits, if the <code>finishedLearning()</code> method returns true.
+</td>
+
+<tr><td colspan=3><p><br><b>information is available on:</b></td>
+<tr>
+<td valign=top><b>activation area</b></td>
+<td valign=top><code>kfm.getActivationArea();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the current activation area of the feature map.
+</td>
+<tr>
+<td valign=top><b>elapsed time</b></td>
+<td valign=top><code>kfm.getElapsedTime();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the time that elapsed since the learning process started.
+</td>
+<tr>
+<td valign=top><b>final activation area</b></td>
+<td valign=top><code>kfm.getStopArea();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the final activation area of the feature map.
+</td>
+<tr>
+<td valign=top><b>initial activation area</b></td>
+<td valign=top><code>kfm.getInitActivationArea();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the initial activation area of the feature map.
+</td>
+<tr>
+<td valign=top><b>initial learning rate</b></td>
+<td valign=top><code>kfm.getInitLearningRate();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the initial learning rate of the net.
+</td>
+<tr>
+<td valign=top><b>learning cycle</b></td>
+<td valign=top><code>kfm.getLearningCycle();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the current learning cycle of the net.
+</td>
+<tr>
+<td valign=top><b>learning rate</b></td>
+<td valign=top><code>kfm.getLearningRate();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the current learning rate of the net.
+</td>
+<tr>
+<td valign=top><b>map size in x</b></td>
+<td valign=top><code>kfm.getMapSizeX();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the size of the feature map in x-dimension.
+</td>
+<tr>
+<td valign=top><b>map size in y</b></td>
+<td valign=top><code>kfm.getMapSizeY();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the size of the feature map in y-dimension.
+</td>
+<tr>
+<td valign=top><b>number of weights</b></td>
+<td valign=top><code>kfm.getNumberOfWeights();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of weights in the weight matrix that connects the input neurons with the neurons of the feature map.
+</td>
+<tr>
+<td valign=top><b>weight values</b></td>
+<td valign=top><code>kfm.getWeightValues();</code></td>
+<td valign=top><b>optional</b><br>
+Returns all weight values of the weight matrix that connects the input neurons with the neurons of the feature map.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-33"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="UsingIM"><font face="Helvetica"><h4>Using the InputMatrix class</h4></font></a>
+<dl><dd>
+<center>
+<table border=1 cellpadding=2 width="60%">
+<tr>
+<td align=center valign=top colspan=2><font size=+1>Features of the InputMatrix class</font></td>
+<tr>
+<td valign=top width="33%"><b>number of input values</b></td>
+<td valign=top>minimum: 1, maximum: N</td>
+<tr>
+<td valign=top width="33%"><b>dimensions</b></td>
+<td valign=top>minimum: 1, maximum: 3</td>
+</table>
+
+<p>
+<table border=1 cellpadding=2 width="90%">
+<tr><td align=center colspan=3><font size=+1>Steps to create an Input Matrix</font></td>
+<tr><th valign=top>step</th><th valign=top>sample code</th><th valign=top>description</th>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>1. object declaration</b></td>
+<td valign=top bgcolor=#d0d0d0><code>InputMatrix im;</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Declares the object <i>im</i> to be of type InputMatrix.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>2. constructor call</b></td>
+<td valign=top bgcolor=#d0d0d0><code>im = new InputMatrix(size,dim);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Creates an instance of InputMatrix.
+This is the only constructor of the class and has the following arguments:
+<br>
+<i>size</i>: the number of input values (1...N)
+<br>
+<i>dim</i>: the dimension of this matrix (1...3)
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>3. set values (version 1)</b></td>
+<td valign=top bgcolor=#d0d0d0><code>im.setInputX(x);</code> <b>(and)</b><br><code>im.setInputY(y);</code> <b>(and)</b><br><code>im.setInputZ(z);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Sets input values for each dimension to this matrix.
+<br>
+These methods can be used sequentially, if you want an input matrix with 1, 2, or 3 dimensions.
+The arguments <i>x</i>, <i>y</i>, and <i>z</i> are arrays of type <code>int</code>.
+<br>
+To define a 3-dimensional input matrix, you may use the <code>setInputValues(x,y,z)</code> method.
+</td>
+<tr>
+<td valign=top bgcolor=#d0d0d0><b>3. set values (version 2)</b></td>
+<td valign=top bgcolor=#d0d0d0><code>im.setInputValues(x,y,z);</code></td>
+<td valign=top bgcolor=#d0d0d0><b>REQUIRED</b><br>
+Sets input values for all three dimensions to this matrix.
+<br>
+This method is used, when you want an input matrix with three dimensions.
+The arguments <i>x</i>, <i>y</i>, and <i>z</i> are arrays of type <code>int</code>.
+</td>
+
+<tr><td colspan=3><p><br><b>information is available on:</b></td>
+<tr>
+<td valign=top><b>number of input values</b></td>
+<td valign=top><code>im.size();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the number of input values in this input matrix.
+</td>
+<tr>
+<td valign=top><b>dimension</b></td>
+<td valign=top><code>im.getDimension();</code></td>
+<td valign=top><b>optional</b><br>
+Returns the dimension of this input matrix.
+</td>
+</table>
+</center>
+
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-32-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Working with Java</font></a></td>
+<td align=center width="20%"><a href="#top-e-33"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-34-text.html"><font size=-1 face="Helvetica">Download</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-33"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face="Helvetica" color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face="Helvetica">
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+
+</HTML>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: class structure</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-22"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<td align=left width="40%"><a href="e-21-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">What is Object Orientation?</font></a></td>
+<td align=center width="20%"><a href="#bot-e-22"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-23-text.html"><font size=-1 face="Helvetica">Neural net classes</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<font face="Helvetica"><h3>The classes and their relationships</h3></font>
+<dl><dd>
+First a few words about my motivation to write this class structure.
+<br>
+Many applications were written for the existing neural network types.
+Each of those programs is focussing on a special problem to be solved.
+<br>
+So if you want to implement a similar neural net to one already written,
+you might either try to understand the source code (that means &quot;fun&quot; for many hours)
+or copy the source code and modify it until it fits your own net's purpose (what is not the best way of developing software).
+<p>
+Due to the fact that most of the existing neural net types have some common components, I thought it would
+be nice, if I had to implement those components once and may use them later in different
+applications, like some sort of a construction kit.
+<br>
+I decided to write classes suitable for the Backpropagation Net and the Kohonen Feature Map, because
+(in my honest opinion) these are the most powerful types of neural networks.
+<p>
+And here is the result of my work:
+<br>
+<i>(You should always keep in mind that this was my <b>first</b> object oriented piece of software, so don't blame me!)</i>
+<p>
+<!-- *** Figure *** -->
+<center>
+<img src="fig/allclass.gif" border=0 width=483 height=293 alt="The classes and their relationships">
+<br><font size=-1>The classes and their relationships</font>
+</center>
+<p>
+This is not to be read as a class hierarchy, as explained in the previous section.
+The levels do not represent levels of abstraction.
+<br>
+The figure only shows, which classes are present and what classes have relationships among each other.
+<p>
+Furthermore, it shall demonstrate my primary goal: The integration of common components.
+<br>
+As you can see, for example, the WeightMatrix class and the NeuronLayer class are commonly used by the two net classes
+(BackpropagationNet and KohonenFeatureMap) although their structure differs in both net types.
+Object Orientation rules!
+<p>
+The following sections explain the classes in greater detail.
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-21-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">What is Object Orientation?</font></a></td>
+<td align=center width="20%"><a href="#top-e-22"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-23-text.html"><font size=-1 face="Helvetica">Neural net classes</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-22"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+</HTML>

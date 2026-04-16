@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: class structure</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-23"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-22-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">The classes and their relationships</font></a></td>
+<td align=center width="20%"><a href="#bot-e-23"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-24-text.html"><font size=-1 face="Helvetica">Common components</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#NeuralNetClasses">Neural net classes</a></b>
+<dd><a href="#NeuralNet"><img src="pics/ya-down.jpg" border=0>Class NeuralNet</a>
+<dd><a href="#BackpropagationNet"><img src="pics/ya-down.jpg" border=0>Class BackpropagationNet</a>
+<dd><a href="#KohonenFeatureMap"><img src="pics/ya-down.jpg" border=0>Class KohonenFeatureMap</a>
+</dl></font></td>
+</table>
+</center>
+
+<p><br><br><font face="Helvetica"><h3>Neural net classes</h3></font>
+<dl><dd>
+These classes represent two neural net types (Backpropagation Net and Kohonen Feature Map).
+<br>
+There is also an abstract class called &quot;NeuralNet&quot;, which is the superclass of both types.
+This class contains generic methods, e.g. a method to set the initial learning rate of a neural net.
+</dl>
+
+
+<p><br><a name="NeuralNet"><font face=Helvetica><h4>Class NeuralNet</h4></font></a>
+<dl><dd>
+This class is the first class in the structure.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>abstract class NeuralNet</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+can't be instantiated
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+none
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>boolean displayNow ()</code><br>
+Indicates, whether the net should be drawn or not, depending on its display step.
+True, if the net should be drawn. False otherwise.
+<p>
+<code>boolean finishedLearning ()</code><br>
+Indicates that the net has finished learning.
+True, if the learning process is finished. False otherwise.
+<p>
+<code>String getElapsedTime ()</code><br>
+Returns the elapsed learning time of a neural net.
+<p>
+<code>int getLearningCycle ()</code><br>
+Returns the current learning cycle of a neural net.
+<p>
+<code>double getLearningRate ()</code><br>
+Returns the current <a href="e-g.html#LearningRate">learning rate</a> of a neural net.
+<p>
+<code>int getMaxLearningCycles ()</code><br>
+Returns the number of maximum learning cycles of a neural net.
+<p>
+<code>void resetTime ()</code><br>
+Resets the net's learning time.
+<p>
+<code>void setDisplayStep ( int displayStep )</code><br>
+Sets a value that indicates the interval to display the net.
+<p>
+<code>void setLearningRate ( double learningRate )</code><br>
+Sets the <a href="e-g.html#LearningRate">learning rate</a> of a neural net.
+<p>
+<code>void setMaxLearningCycles ( int maxLearningCycles )</code><br>
+Sets the number of learning cycles, the net shall perform.
+<br>If -1, the net has no maximum cycle.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-23"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="BackpropagationNet"><font face=Helvetica><h4>Class BackpropagationNet</h4></font></a>
+<dl><dd>
+This class represents a <a href="e-g.html#BackpropagationNet">Backpropagation Net</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class BackpropagationNet</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+    <a href="e-23-text.html#NeuralNet">NeuralNet</a>
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+application
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public BackpropagationNet ()</code>
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>void addNeuronLayer ( int size )</code><br>
+Adds a <a href="e-g.html#NeuronLayer">neuron layer</a> with <code>size</code> neurons.
+<br>Note that neuron layers are sequentially added to the net.
+<p>
+<code>void connectLayers ()</code><br>
+Connects all neuron layers with <a href="e-g.html#WeightMatrix">weight matrices</a>.
+<br>Must be called after all neuron layers have been added.
+<p>
+<code>double getAccuracy ()</code><br>
+Returns the accuracy value.
+<p>
+<code>double getError ()</code><br>
+Returns the current <a href="e-g.html#Error">error</a> of the net.
+<p>
+<code>String getInputPattern ( int patternNr )</code><br>
+Returns the input pattern with number <code>patternNr</code>.
+<p>
+<code>double getMinimumError ()</code><br>
+Returns the minimum <a href="e-g.html#Error">error</a> of a neural net.
+<p>
+<code>float[] getNeuronOutputs ( int layerNr )</code><br>
+Returns the output values of all neurons in layer <code>layerNr</code>.
+<p>
+<code>int getNumberOfLayers ()</code><br>
+Returns the number of neuron layers.
+<p>
+<code>int getNumberOfNeurons ( int layerNr )</code><br>
+Returns the number of neurons in layer <code>layerNr</code>.
+<p>
+<code>int getNumberOfPatterns ()</code><br>
+Returns the number of patterns.
+<p>
+<code>int getNumberOfWeights ()</code><br>
+Returns the number of weights of all weight matrices.
+<p>
+<code>int getNumberOfWeights ( int matrixNr )</code><br>
+Returns the number of weights in weight matrix <code>matrixNr</code>.
+<p>
+<code>String getOutputPattern ( int patternNr )</code><br>
+Returns the output pattern with number <code>patternNr</code>.
+<p>
+<code>float getPatternError ( int patternNr )</code><br>
+Returns the error of output pattern <code>patternNr</code>.
+<p>
+<code>String getTargetPattern ( int patternNr )</code><br>
+Returns the target pattern with number <code>patternNr</code>.
+<p>
+<code>float[][] getWeightValues ( int matrixNr )</code><br>
+Returns the weight values of weight matrix <code>matrixNr</code>.
+<br><b>The values for <code>matrixNr</code> start with zero!</b>
+<p>
+<code>void learn ()</code><br>
+Performs one learning step.
+<p>
+<code>synchronized void readConversionFile ( String conversionFileName )</code><br>
+Reads a conversion table for ASCII-binary values from file <code>conversionFileName</code>.
+<p>
+<code>synchronized void readPatternFile ( String patternFileName )</code><br>
+Reads input and target patterns from file <code>patternFileName</code>.
+<p>
+<code>String recall ( String recallInput )</code><br>
+Tries to recall the correct output for a learned input pattern <code>recallInput</code>.
+<p>
+<code>void setAccuracy ( double accuracy )</code><br>
+Sets an accuracy value for the net, which is something like a &quot;fuzzy border&quot;
+for output/recall purposes (default is 0.2).
+<p>
+<code>void setMinimumError ( float minimumError )</code><br>
+Sets the minimum <a href="e-g.html#Error">error</a> of a neural net.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-23"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="KohonenFeatureMap"><font face=Helvetica><h4>Class KohonenFeatureMap</h4></font></a>
+<dl><dd>
+This class represents a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a> neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class KohonenFeatureMap</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+    <a href="e-23-text.html#NeuralNet">NeuralNet</a>
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+application
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public KohonenFeatureMap ()</code>
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>void connectLayers ( InputMatrix inputMatrix )</code><br>
+Connects the feature map and the <a href="e-g.html#InputLayer">input layer</a> (which is generated depending on the size of
+the <code>inputMatrix</code>) with a <a href="e-g.html#WeightMatrix">weight matrix</a>.
+<p>
+<code>void createMapLayer ( int xSize, int ySize )</code><br>
+Creates a two-dimensional feature map with <code>xSize*ySize</code> map neurons.
+<p>
+<code>double getActivationArea ()</code><br>
+Returns the current <a href="e-g.html#ActivationArea">activation area</a>.
+<p>
+<code>double getInitActivationArea ()</code><br>
+Returns the initial <a href="e-g.html#ActivationArea">activation area</a>.
+<p>
+<code>double getInitLearningRate ()</code><br>
+Returns the initial <a href="e-g.html#LearningRate">learning rate</a>.
+<p>
+<code>int getMapSizeX ()</code><br>
+Returns the number of neurons in the map layer's x-dimension.
+<p>
+<code>int getMapSizeY ()</code><br>
+Returns the number of neurons in the map layer's y-dimension.
+<p>
+<code>int getNumberOfWeights ()</code><br>
+Returns the number of weights in the weight matrix.
+<p>
+<code>double getStopArea ()</code><br>
+Returns the final <a href="e-g.html#ActivationArea">activation area</a>.
+<p>
+<code>float[][] getWeightValues ()</code><br>
+Returns the weight values of the net's weight matrix.
+<p>
+<code>void learn ()</code><br>
+Performs a learning step.
+<p>
+<code>void setInitActivationArea ( double initActivationArea )</code><br>
+Sets the initial <a href="e-g.html#ActivationArea">activation area</a>.
+<p>
+<code>void setStopArea ( double stopArea )</code><br>
+Sets the final <a href="e-g.html#ActivationArea">activation area</a> at which the net stops learning.
+<p>
+<code>void setInitLearningRate ( double initLearningRate )</code><br>
+Sets the initial <a href="e-g.html#LearningRate">learning rate</a>.
+</td>
+</table>
+</center>
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-22-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">The classes and their relationships</font></a></td>
+<td align=center width="20%"><a href="#top-e-23"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-24-text.html"><font size=-1 face="Helvetica">Common components</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-23"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+</HTML>

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: neural net overview</title></HEAD>
+
+<body bgcolor=#c0c0c0 link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-12"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-11-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">What are neural nets?</font></a></td>
+<td align=center width="20%"><a href="#bot-e-12"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-13-text.html"><font size=-1 face="Helvetica">The learning process</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#TypesOfNeuralNets">Types of neural nets</a></b>
+<dd><a href="#Perceptron"><img src="pics/ya-down.jpg" border=0>Perceptron</a>
+<dd><a href="#MultiLayerPerceptron"><img src="pics/ya-down.jpg" border=0>Multi-Layer-Perceptron</a>
+<dd><a href="#BackpropagationNet"><img src="pics/ya-down.jpg" border=0>Backpropagation Net</a>
+<dd><a href="#HopfieldNet"><img src="pics/ya-down.jpg" border=0>Hopfield Net</a>
+<dd><a href="#KohonenFeatureMap"><img src="pics/ya-down.jpg" border=0>Kohonen Feature Map</a>
+</dl></font></td>
+</table>
+</center>
+
+
+<p><br><br><a name="TypesOfNeuralNets"><font face=Helvetica><h3>Types of Neural Nets</h3></font></a>
+<dl><dd>
+As mentioned before, several types of neural nets exist.
+    <dl>
+    <dt>They can be distinguished by
+    <dd>their type (<a href="e-g.html#FeedforwardType">feedforward</a> or <a href="e-g.html#FeedbackType">feedback</a>),
+    <dd>their structure
+    <dd>and the <a href="e-g.html#LearningAlgorithm">learning algorithm</a> they use.
+    </dl>
+The <i>type</i> of a neural net indicates, if the neurons of one of the net's layers may be connected among each other.
+Feedforward neural nets allow only neuron connections between two different layers, while nets of the
+feedback type have also connections between neurons of the same layer.
+<p>
+In this section, a selection of neural nets will be described.
+</dl>
+
+
+<p><br><a name="Perceptron"><font face=Helvetica><h4>Perceptron</h4></font></a><p>
+<dl><dd>
+The Perceptron was first introduced by F. Rosenblatt in 1958.
+<br>
+It is a very simple neural net type with two <a href="e-g.html#NeuronLayer">neuron layers</a>
+that accepts only binary <a href="e-g.html#Input">input</a> and <a href="e-g.html#Output">output</a> values (0 or 1).
+The learning process is <a href="e-g.html#SupervisedLearning">supervised</a> and the net is able to solve basic
+logical operations like AND or OR.
+It is also used for pattern classification purposes.
+<br>
+More complicated logical operations (like the <a href="e-g.html#XORProblem">XOR problem</a>) cannot be solved by a Perceptron.
+<p>
+<center>
+<table border=1 cellpadding=2 width="80%">
+<tr><td align=center colspan=2><font size=+1>Perceptron characteristics</font></td>
+<tr><td valign=top align=left width="25%"><b>sample structure</b></td>
+<td valign=top align=center>
+<img src="fig/slp.gif" border=0 width=320 height=240 alt="sample structure of a Perceptron">
+</td>
+<tr><td valign=top align=left width="25%"><b>type</b></td>
+<td valign=top align=left>
+<a href="e-g.html#FeedforwardType">feedforward</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>neuron layers</b></td>
+<td valign=top align=left>
+1 input layer
+<br>
+1 output layer
+</td>
+<tr><td valign=top align=left width="25%"><b>input value types</b></td>
+<td valign=top align=left>
+binary
+</td>
+<tr><td valign=top align=left width="25%"><b>activation function</b></td>
+<td valign=top align=left>
+<a href="e-g.html#HardLimiter">hard limiter</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning method</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SupervisedLearning">supervised</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning algorithm</b></td>
+<td valign=top align=left>
+<a href="e-g.html#HebbLearningRule">Hebb learning rule</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>mainly used in</b></td>
+<td valign=top align=left>
+simple logical operations
+<br>
+pattern classification
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-12"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="MultiLayerPerceptron"><font face=Helvetica><h4>Multi-Layer-Perceptron</h4></font></a><p>
+<dl><dd>
+The Multi-Layer-Perceptron was first introduced by M. Minsky and S. Papert in 1969.
+<br>
+It is an extended Perceptron and has one ore more <a href="e-g.html#HiddenLayer">hidden neuron layers</a>
+between its input and output layers.
+<br>
+Due to its extended structure, a Multi-Layer-Perceptron is able to solve every logical operation, including the <a href="e-g.html#XORProblem">XOR problem</a>.
+<p>
+<center>
+<table border=1 cellpadding=2 width="80%">
+<tr><td align=center colspan=2><font size=+1>Multi-Layer-Perceptron characteristics</font></td>
+<tr><td valign=top align=left width="25%"><b>sample structure</b></td>
+<td valign=top align=center>
+<img src="fig/mlp.gif" border=0 width=333 height=358 alt="sample structure of a Multi-Layer-Perceptron">
+</td>
+<tr><td valign=top align=left width="25%"><b>type</b></td>
+<td valign=top align=left>
+<a href="e-g.html#FeedforwardType">feedforward</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>neuron layers</b></td>
+<td valign=top align=left>
+1 input layer
+<br>
+1 or more hidden layers
+<br>
+1 output layer
+</td>
+<tr><td valign=top align=left width="25%"><b>input value types</b></td>
+<td valign=top align=left>
+binary
+</td>
+<tr><td valign=top align=left width="25%"><b>activation function</b></td>
+<td valign=top align=left>
+<a href="e-g.html#HardLimiter">hard limiter</a> / <a href="e-g.html#SigmoidActivation">sigmoid</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning method</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SupervisedLearning">supervised</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning algorithm</b></td>
+<td valign=top align=left>
+<a href="e-g.html#DeltaLearningRule">delta learning rule</a>
+<br>
+<a href="e-g.html#BackPropagation">backpropagation</a> (mostly used)
+</td>
+<tr><td valign=top align=left width="25%"><b>mainly used in</b></td>
+<td valign=top align=left>
+complex logical operations
+<br>
+pattern classification
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-12"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="BackpropagationNet"><font face=Helvetica><h4>Backpropagation Net</h4></font></a><p>
+<dl><dd>
+The Backpropagation Net was first introduced by G.E. Hinton, E. Rumelhart and R.J. Williams in 1986
+<br>
+and is one of the most powerful neural net types.
+<br>
+It has the same structure as the Multi-Layer-Perceptron and uses the <a href="e-g.html#BackPropagation">backpropagation learning algorithm</a>.
+<p>
+<center>
+<table border=1 cellpadding=2 width="80%">
+<tr><td align=center colspan=2><font size=+1>Backpropagation Net characteristics</font></td>
+<tr><td valign=top align=left width="25%"><b>sample structure</b></td>
+<td valign=top align=center>
+<img src="fig/bpn.gif" border=0 width=333 height=359 alt="sample structure of a Backpropagation Net">
+</td>
+<tr><td valign=top align=left width="25%"><b>type</b></td>
+<td valign=top align=left>
+<a href="e-g.html#FeedforwardType">feedforward</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>neuron layers</b></td>
+<td valign=top align=left>
+1 input layer
+<br>
+1 or more hidden layers
+<br>
+1 output layer
+</td>
+<tr><td valign=top align=left width="25%"><b>input value types</b></td>
+<td valign=top align=left>
+binary
+</td>
+<tr><td valign=top align=left width="25%"><b>activation function</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SigmoidActivation">sigmoid</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning method</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SupervisedLearning">supervised</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning algorithm</b></td>
+<td valign=top align=left>
+<a href="e-g.html#BackPropagation">backpropagation</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>mainly used in</b></td>
+<td valign=top align=left>
+complex logical operations
+<br>
+pattern classification
+<br>
+speech analysis
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-12"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="HopfieldNet"><font face=Helvetica><h4>Hopfield Net</h4></font></a><p>
+<dl><dd>
+The Hopfield Net was first introduced by physicist J.J. Hopfield in 1982
+and belongs to neural net types which are called &quot;<a href="e-g.html#ThermodynamicalModel">thermodynamical models</a>&quot;.
+<br>
+It consists of a set of neurons, where each neuron is connected to each other neuron.
+There is no differentiation between input and output neurons.
+<br>
+The main application of a Hopfield Net is the storage and recognition of patterns, e.g. image files.
+<p>
+<center>
+<table border=1 cellpadding=2 width="80%">
+<tr><td align=center colspan=2><font size=+1>Hopfield Net characteristics</font></td>
+<tr><td valign=top align=left width="25%"><b>sample structure</b></td>
+<td valign=top align=center>
+<img src="fig/hop.gif" border=0 width=351 height=308 alt="sample structure of a Hopfield Net">
+</td>
+<tr><td valign=top align=left width="25%"><b>type</b></td>
+<td valign=top align=left>
+<a href="e-g.html#FeedbackType">feedback</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>neuron layers</b></td>
+<td valign=top align=left>
+1 matrix
+</td>
+<tr><td valign=top align=left width="25%"><b>input value types</b></td>
+<td valign=top align=left>
+binary
+</td>
+<tr><td valign=top align=left width="25%"><b>activation function</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SignumActivation">signum</a> / <a href="e-g.html#HardLimiter">hard limiter</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning method</b></td>
+<td valign=top align=left>
+<a href="e-g.html#UnsupervisedLearning">unsupervised</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning algorithm</b></td>
+<td valign=top align=left>
+<a href="e-g.html#DeltaLearningRule">delta learning rule</a>
+<br>
+<a href="e-g.html#SimulatedAnnealing">simulated annealing</a> (mostly used)
+</td>
+<tr><td valign=top align=left width="25%"><b>mainly used in</b></td>
+<td valign=top align=left>
+pattern association
+<br>
+optimization problems
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-12"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="KohonenFeatureMap"><font face=Helvetica><h4>Kohonen Feature Map</h4></font></a><p>
+<dl><dd>
+The Kohonen Feature Map was first introduced by finnish professor Teuvo Kohonen (University of Helsinki) in 1982.
+<br>
+It is probably the most useful neural net type, if the learning process of the human brain shall be simulated.
+The &quot;heart&quot; of this type is the <i>feature map</i>, a neuron layer where neurons are organizing themselves
+according to certain input values.
+<br>
+The type of this neural net is both feedforward (input layer to feature map) and feedback (feature map).
+<br>
+(A Kohonen Feature Map is used in the <a href="e-sample.html" target="TTFrame">sample applet</a>)
+<p>
+<center>
+<table border=1 cellpadding=2 width="80%">
+<tr><td align=center colspan=2><font size=+1>Kohonen Feature Map characteristics</font></td>
+<tr><td valign=top align=left width="25%"><b>sample structure</b></td>
+<td valign=top align=center>
+<img src="fig/kfm.gif" border=0 width=410 height=290 alt="sample structure of a Kohonen Feature Map">
+</td>
+<tr><td valign=top align=left width="25%"><b>type</b></td>
+<td valign=top align=left>
+<a href="e-g.html#FeedforwardType">feedforward</a> / <a href="e-g.html#FeedbackType">feedback</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>neuron layers</b></td>
+<td valign=top align=left>
+1 input layer
+<br>
+1 map layer
+</td>
+<tr><td valign=top align=left width="25%"><b>input value types</b></td>
+<td valign=top align=left>
+binary, real
+</td>
+<tr><td valign=top align=left width="25%"><b>activation function</b></td>
+<td valign=top align=left>
+<a href="e-g.html#SigmoidActivation">sigmoid</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning method</b></td>
+<td valign=top align=left>
+<a href="e-g.html#UnsupervisedLearning">unsupervised</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>learning algorithm</b></td>
+<td valign=top align=left>
+<a href="e-g.html#Selforganization">selforganization</a>
+</td>
+<tr><td valign=top align=left width="25%"><b>mainly used in</b></td>
+<td valign=top align=left>
+pattern classification
+<br>
+optimization problems
+<br>
+simulation
+</td>
+</table>
+</center>
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-11-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">What are neural nets?</font></a></td>
+<td align=center width="20%"><a href="#top-e-12"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-13-text.html"><font size=-1 face="Helvetica">The learning process</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-12"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+</HTML>

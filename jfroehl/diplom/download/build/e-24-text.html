@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: class structure</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-24"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-23-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Neural net classes</font></a></td>
+<td align=center width="20%"><a href="#bot-e-24"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-25-text.html"><font size=-1 face="Helvetica">Net type specific components</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b8b8b8>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>jump directly to </i></font></td>
+<tr>
+<td><font size=-1 face=Helvetica><dl>
+<dt><br><b><a href="#CommonComponents">Common Components</a></b>
+<dd><a href="#Neuron"><img src="pics/ya-down.jpg" border=0>Class Neuron</a>
+<dd><a href="#NeuronLayer"><img src="pics/ya-down.jpg" border=0>Class NeuronLayer</a>
+<dd><a href="#WeightMatrix"><img src="pics/ya-down.jpg" border=0>Class WeightMatrix</a>
+</dl></font></td>
+</table>
+</center>
+
+<p><br><br><a name="CommonComponents"><font face=Helvetica><h3>Common components</h3></font></a>
+<dl><dd>
+These classes represent neural net components that are commonly used by neural nets, especially
+the Backpropagation Net and the Kohonen Feature Map.
+<br>The three classes listed here are: Neuron, NeuronLayer and WeightMatrix.
+<p>
+<b>Note that these classes are only used by the neural net classes in the structure.
+<br>
+This means, you don't have to worry about instantiation and things like that, for it's all handled by other classes.</b>
+</dl>
+
+
+<p><br><a name="Neuron"><font face=Helvetica><h4>Class Neuron</h4></font></a>
+<dl><dd>
+This class represents a <a href="e-g.html#Neuron">neuron</a> of a neural net's <a href="e-g.html#NeuronLayer">neuron layer</a>.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class Neuron</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-24-text.html#NeuronLayer"><code>NeuronLayer</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public Neuron ()</code>
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>void activateSigmoid ()</code><br>
+Performs a <a href="e-g.html#SigmoidActivation">sigmoid activation</a> on a neuron's
+<a href="e-g.html#Input">input</a> and computes its <a href="e-g.html#Output">output</a>.
+<p>
+<code>void computeOutputError ( float targetValue )</code><br>
+Computes the <a href="e-g.html#OutputError">output error</a> of a neuron in an <a href="e-g.html#OutputLayer">output neuron layer</a> by comparing
+the neuron's current output with the <code>targetValue</code>.
+<p>
+<code>float getInput ()</code><br>
+Returns the input value of a neuron.
+<p>
+<code>float getOutput ()</code><br>
+Returns the output value of a neuron.
+<p>
+<code>float getOutputError ()</code><br>
+Returns the output error value of a neuron.
+<p>
+<code>void init ( float input )</code><br>
+Initializes a neuron with an <code>input</code> value.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-24"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="NeuronLayer"><font face=Helvetica><h4>Class NeuronLayer</h4></font></a>
+<dl><dd>
+This class represents a <a href="e-g.html#NeuronLayer">neuron layer</a> of a neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class NeuronLayer</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-23-text.html#BackpropagationNet"><code>BackpropagationNet</code></a>
+<br><a href="e-23-text.html#KohonenFeatureMap"><code>KohonenFeatureMap</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public NeuronLayer ( int size )</code>
+<br>Creates a neuron layer with <code>size</code> neurons.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>void computeLayerError ( Pattern pattern )</code><br>
+Computes the <a href="e-g.html#OutputError">output error</a> values of all neurons in a layer by comparing
+the <a href="e-g.html#Output">output</a> with a target <code>pattern</code>.
+<p>
+<code>void computeOutput ()</code><br>
+Computes the output values of all neurons in a layer.
+<p>
+<code>float[] getLayerError ()</code><br>
+Returns the output error values of all neurons in a layer.
+<p>
+<code>float[] getOutput ()</code><br>
+Returns the output values of all neurons in a layer.
+<p>
+<code>void setInput ( InputValue value )</code><br>
+Sets a <code>value</code> as an input to a neuron layer.
+<br>Only used by the input layer of a <a href="e-g.html#KohonenFeatureMap">Kohonen Feature Map</a>.
+<p>
+<code>void setInput ( Pattern pattern )</code><br>
+Sets a <code>pattern</code> as an input to a neuron layer.
+<br>Only used by the input layer of a <a href="e-g.html#BackpropagationNet">Backpropagation Net</a>.
+<p>
+<code>int size ()</code><br>
+Returns the number of neurons in a layer.
+</td>
+</table>
+</center>
+</dl>
+<table border=0 cellpadding=2 bgcolor=#b8b8b8 align=right>
+<tr><td><a href="#top-e-24"><img src="pics/ya-top.jpg" border=0 align=left><font size=-1 face="Helvetica">top of page</font></a></td>
+</table>
+
+
+<p><br><a name="WeightMatrix"><font face=Helvetica><h4>Class WeightMatrix</h4></font></a>
+<dl><dd>
+This class represents a <a href="e-g.html#WeightMatrix">weight matrix</a> between two <a href="#NeuronLayer">neuron layers</a> of a neural net.
+<p><center>
+<table border=1 cellpadding=2 width="80%">
+<tr>
+<td align=center colspan=2><font size=+1>public class WeightMatrix</font></td>
+<tr>
+<td align=left valign=top width="20%"><b>extends</b></td>
+<td align=left valign=top>
+<pre>
+java.lang.Object
+</pre>
+</td>
+<tr>
+<td align=left valign=top><b>instantiated by</b></td>
+<td align=left valign=top>
+<a href="e-23-text.html#BackpropagationNet"><code>BackpropagationNet</code></a>
+<br><a href="e-23-text.html#KohonenFeatureMap"><code>KohonenFeatureMap</code></a>
+</td>
+<tr>
+<td align=left valign=top><b>constructors</b></td>
+<td align=left valign=top>
+<code>public WeightMatrix ( int xSize, int ySize, boolean withBias )</code>
+<br>Creates a weight matrix with <code>xSize*ySize</code> weights.
+The <code>withBias</code> flag indicates, whether Bias values shall be used or not.
+</td>
+<tr>
+<td align=left valign=top><b>methods</b></td>
+<td align=left valign=top>
+<code>void changeWeights ( float[] precLayer, float[] succLayer, double learningRate )</code><br>
+Changes all weights using the <a href="e-g.html#BackPropagation">Backpropagation learning algorithm</a>.
+<br>Only used by BackpropagationNet.
+<p>
+<code>void changeWeightsKFM ( float[] precLayer, float[] succLayer, double learningRate )</code><br>
+Changes all weights using the <a href="e-g.html#Selforganization">Selforganization learning algorithm</a>.
+<br>Only used by KohonenFeatureMap.
+<p>
+<code>float[] getBiases ()</code><br>
+Returns the values of all biases in a weight matrix.
+<p>
+<code>float[] getInputWeights ( int targetNeuron )</code><br>
+Returns the values of all incoming weights that lead to the neuron with number <code>targetNeuron</code>.
+<p>
+<code>float[] getOutputWeights ( int sourceNeuron )</code><br>
+Returns the values of all outgoing weights that lead away from the neuron with number <code>sourceNeuron</code>.
+<p>
+<code>float[][] getWeights ()</code><br>
+Returns the values of all weights in a weight matrix.
+<p>
+<code>void init ()</code><br>
+Initializes all weights with values ranging from -1.0 to 1.0.
+<p>
+<code>void init ( float[][] iweight )</code><br>
+Initializes all weights with specified values stored in <code>iweight</code>.
+<p>
+<code>void init ( InputValue[] iv, int dimension )</code><br>
+Initializes all weights with InputValues stored in <code>iv</code> that have the dimension <code>dimension</code>.
+<br>Only used by KohonenFeatureMap.
+<p>
+<code>int size ()</code><br>
+Returns the number of weights in a weight matrix.
+</td>
+</table>
+</center>
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"><a href="e-23-text.html"><img src="pics/ya-left.jpg" border=0 halign=left><font size=-1 face="Helvetica">Neural net classes</font></a></td>
+<td align=center width="20%"><a href="#top-e-24"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-25-text.html"><font size=-1 face="Helvetica">Net type specific components</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-24"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face=Helvetica color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face=Helvetica>
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<p><font size=-1>Last modified: <!--#config timefmt="%B %d, %Y"--><!--#echo var="LAST_MODIFIED"--><br>Copyright &#169; 1996-97 Jochen Fr&ouml;hlich. All rights reserved.</font>
+</center>
+
+</body>
+</HTML>

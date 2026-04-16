@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD><title>Neural Networks with Java: using the classes</title></HEAD>
+
+<body bgcolor="#c0c0c0" link=#700070 alink=#f5e196 vlink=#848484>
+<a name="top-e-31"></a>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#bot-e-31"><img src="pics/ya-bottom.jpg" border=0 halign=left><font size=-1 face="Helvetica">bottom of page</font></a></td>
+<td align=right width="40%"><a href="e-32-text.html"><font size=-1 face="Helvetica">Working with Java</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+
+<p><br>
+<a name="JavaNew"><font face="Helvetica"><h3>Java = new ProgrammingLanguage()</h3></font></a>
+<dl><dd>
+    <dl><dd>
+    &quot;Java: A simple, object-oriented, network-savvy, interpreted, robust, secure, architecture neutral,
+    portable, high-performance, multithreaded, dynamic language.&quot;
+    <br>[<a href="e-literature-text.html#JS96">JS96</a>]</dl>
+<p>
+This is how J<font size=-1>AVA</font>S<font size=-1>OFT</font>, the Java-related organization of Sun Microsystems,
+describes the new programming language in its White Paper.
+<p>
+I don't want to explain each of these &quot;buzzwords&quot; in detail, as other authors do [see <a href="e-literature-text.html#FLA96">FLA96</a>, pp. 4-9],
+but only those that were relevant for my decision to use Java as the language for the implementation of my classes.
+<p><br>
+<font face=Helvetica>Simple</font><p>
+    <dl><dd>
+    Java isn't a completely <i>new</i> language.
+    Its syntax and constructs look very familiar to those in other languages like C or C++,
+    what makes learning easy for programmers of these languages (I've experienced that by myself).
+    <dd>By speaking of a <i>simple</i> language, it is meant that some (critical or rarely used) features of
+    C or C++ are no longer present in Java. Examples for such simplifications are that Java doesn't support
+    <code>struct</code> or <code>union</code> constructs or multiple inheritance.
+    <dd><br>F<font size=-1>LANAGAN</font> mentiones other advantages that Java provides:
+        <dl><dd>
+        &quot;Perhaps the most important simplification, however, is that Java does not use pointers.
+        Pointers are one of the most bug-prone aspects of C and C++ programming.
+        Since Java does not have structures, and arrays and strings are objects, there's no need for pointers.
+        Java automatically handles the referencing and dereferencing of objects for you.
+        Java also implements automatic garbage collection [sometimes...; author's remark], so you don't have to worry about memory management issues.
+        All of this frees you from having to worry about dangling pointers, invalid pointer references, and memory leaks,
+        so you can spend your time developing the functionality of your programs.&quot;
+        <br>[<a href="e-literature-text.html#FLA96">FLA96</a>, p. 5]
+        </dl>
+    <dd><br>These facts indeed make Java a lot easier to work with than other languages do.
+    <dd>Working with Java does not neccessarily require programming experience in other languages, although it would be helpful.
+    I think, it's also a good way for novices to make first steps in programming.
+    </dl>
+<p><br>
+<font face=Helvetica>Object-oriented</font><p>
+    <dl><dd>
+    When working with Java, you can't help but going the object-oriented way, for nearly everything in Java is an object.
+    <dd><br>As F<font size=-1>LANAGAN</font> describes it:
+        <dl><dd>
+        &quot;Unlike C++, Java was designed to be object-oriented from the ground up.
+        Most things in Java are objects; the simple numeric, character, and boolean types are the only exceptions.&quot;
+        <br>[<a href="e-literature-text.html#FLA96">FLA96</a>, p. 6]
+        </dl>
+    <dd><br>To provide a quick approach, the Java <a href="e-g.html#API">API</a> offers a lot of already designed classes, arranged in <i>packages</i>.
+    <dd>The packages of the <a href="e-g.html#JDK">JDK</a>, Version 1.0.2, are the following:
+    <dd><center>
+    <table border=0 cellpadding=2 width="80%">
+    <tr><td valign=top align=left><code><b>java.lang</b></code></td>
+    <td valign=top align=left>Package that contains essential Java classes, including numerics, strings, objects, compiler, runtime, security, and threads.
+    This is the only package that is automatically imported into every Java program.</td>
+    <tr><td valign=top align=left><code><b>java.io</b></code></td>
+    <td valign=top align=left>Package that provides classes to manage input and output streams to read data from and write data to files, strings, and other sources.</td>
+    <tr><td valign=top align=left><code><b>java.util</b></code></td>
+    <td valign=top align=left>Package that contains miscellaneous utility classes, including generic data structures, bit sets, time, date, string manipulation, random number generation, system
+    properties, notification, and enumeration of data structures.</td>
+    <tr><td valign=top align=left><code><b>java.net</b></code></td>
+    <td valign=top align=left>Package that provides classes for network support, including <a href="e-g.html#URL">URL</a>s, <a href="e-g.html#TCP">TCP</a> sockets, <a href="e-g.html#UDP">UDP</a> sockets, <a href="e-g.html#IP">IP</a> addresses, and a binary-to-text converter.</td>
+    <tr><td valign=top align=left><code><b>java.awt</b></code></td>
+    <td valign=top align=left>Package that provides an integrated set of classes to manage user interface components such as windows, dialog boxes, buttons, checkboxes, lists, menus,
+    scrollbars, and text fields. (<a href="e-g.html#AWT">AWT</a> = Abstract Window Toolkit)</td>
+    <tr><td valign=top align=left><code><b>java.image</b></code></td>
+    <td valign=top align=left>Package that provides classes for managing image data, including color models, cropping, color filtering, setting pixel values, and grabbing snapshots.</td>
+    <tr><td valign=top align=left><code><b>java.peer</b></code></td>
+    <td valign=top align=left>Package that connects <a href="e-g.html#AWT">AWT</a> components to their platform-specific implementations (such as Motif widgets or Microsoft Windows controls).</td>
+    <tr><td valign=top align=left><code><b>java.applet</b></code></td>
+    <td valign=top align=left>Package that enables the creation of applets through the Applet class. It also provides several interfaces that connect an applet to its document and to resources for playing audio.</td>
+    <tr><td>[<a href="e-literature-text.html#GY96">GY96</a>]</td><td></td>
+    </table></center>
+    <dd><br>The classes within these packages can be used as the base for own programs to be written.
+    <dd>In addition, the source codes of all classes are freely available and may be studied by advanced programmers to
+    understand Java in detail.
+    </dl>
+<p><br>
+<font face=Helvetica>Network-savvy</font><p>
+    <dl><dd>
+    This aspect is probably the one, which made Java such a popular language.
+    <dd>Since the past few years, the World Wide Web has caused some kind of enthusiasm all over the world.
+    Everybody speaks of the &quot;Global Village&quot; and the &quot;Information Superhighway&quot;.
+    And Java supports the requirements of distributed applications perfectly.
+    <dd>Providing the neccessary classes and routines for network-wide operations in the <code>java.net</code> package,
+    Java makes programming for the Internet much more easier than it was in languages as C and C++.
+    <dd>For instance, connecting to a resource and transmitting its content can now be done the same way as opening and reading a local file.
+    <dd><br>Besides, the possibility of integrating Java programs into Web pages in form of <i>applets</i>
+    is a great and useful way to visualize different subjects, users can interact with over the net.
+    </dl>
+<p><br>
+<font face=Helvetica>Architecture neutral</font><p>
+    <dl><dd>
+    As mentioned before, Java was designed to support &quot;programming for the Internet&quot;.
+    Because the Internet is an <i>Open System</i>, consisting of a large number of different computer systems,
+    you need applications that are running on any of these systems.
+    <dd>Gone are the times where software had to be rewritten/recompiled if it should run on a different architecture,
+    as F<font size=-1>LANAGAN</font> explains:
+        <dl><dd>
+        &quot;[...] Java programs are compiled to an architecture neutral byte-code format.
+        The primary advantage of this approach is that it allows a Java application to run on any system, as long as that system implements the Java Virtual Machine.
+        Since Java was designed to create network-based applications, it is important that Java applications be able to run
+        on all of the different kinds of systems found on the Internet.&quot;
+        <br>[<a href="e-literature-text.html#FLA96">FLA96</a>, p. 8]
+        </dl>
+    <dd><br>From the developer's view this means a great improvement, because the specific properties of different
+    systems (like numeric representation or threads control) have not to be worried about any longer.
+    This leads to faster software development.
+    <dd>Once an application had been written and compiled on, for example, an IBM PC running Windows95/NT, the produced
+    byte-code runs also on a UNIX workstation or a PowerPC Macintosh without any modifications.
+    Using the classes of the <code>java.awt</code> package, the application also has the appropriate look for each system.
+    </dl>
+<p><br><br>
+After all that praising, a few words must be said about Java's &quot;other side&quot;:
+<p>
+They speak of <i>high-performance</i>.
+You probably don't agree to that statement immediately, but there is a reason why Java programs seem to run slowly.
+    <dl><dd>
+    &quot;Java is an interpreted language, so it is never going to be as fast as a compiled language like C.
+    In fact, Java is on the average about 20 times slower than C.
+    But before you throw up your arms in disgust, be aware that this speed is more than adequate to run interactive,
+    <a href="e-g.html#GUI">GUI</a> and network-based applications, where the application is often idle, waiting for the user to do something,
+    or waiting for data from the network.&quot;
+    <br>[<a href="e-literature-text.html#FLA96">FLA96</a>, p. 8]</dl>
+<p>
+A real disadvantage of Java that might lead developers to frustration is obvious, when a user interface is to be implemented.
+<br>
+Java provides so called &quot;Layout Managers&quot; for different purposes that are very hard to work with.
+<br>
+For example, if you want to arrange layout components in a window, there is no possibility to specify <i>absolute</i> coordinates.
+Instead, you have to deal with <i>relative</i> positions, what permanently leads to &quot;funny&quot; results.
+<i>(Don't ask me, how long I worked on the tiny Parameters window of the sample applet. A &quot;relative&quot; long time...)</i>
+<p>
+But the Java language specification is changing constantly.
+<br>
+While writing these pages, the new <a href="e-g.html#JDK">JDK</a> Version 1.1 had been announced, which will provide
+some additional packages and, hopefully, removes the lacks of previous releases.
+</dl>
+
+
+<p><br><br>
+<table border=0 cellpadding=2 cellspacing=0 width="100%" bgcolor=#b8b8b8>
+<tr>
+<td align=left width="40%"></td>
+<td align=center width="20%"><a href="#top-e-31"><img src="pics/ya-top.jpg" border=0 halign=left><font size=-1 face="Helvetica">top of page</font></a></td>
+<td align=right width="40%"><a href="e-32-text.html"><font size=-1 face="Helvetica">Working with Java</font><img src="pics/ya-right.jpg" border=0 halign=right></a></td>
+</table>
+
+<p><br>
+<a name="bot-e-31"></a>
+<center>
+<table border=0 cellpadding=1 cellspacing=0 bgcolor=#b4b4b4>
+<tr><td bgcolor=#888888 align=right><font size=-1 face="Helvetica" color=#cccccc><i>navigation </i></font></td>
+<tr>
+<td align=center>
+<font size=-1 face="Helvetica">
+[<a href="e-index.html" target="_top">main page</a>]
+[<a href="e-content.html" target="TTFrame">content</a>]
+[<a href="e-1.html" target="TTFrame">neural net overview</a>]<br>
+[<a href="e-2.html" target="TTFrame">class structure</a>]
+[<a href="e-3.html" target="TTFrame">using the classes</a>]
+[<a href="e-sample.html" target="TTFrame">sample applet</a>]<br>
+[<a href="e-glossary.html" target="TTFrame">glossary</a>]
+[<a href="e-literature.html" target="TTFrame">literature</a>]
+[<a href="e-author.html" target="TTFrame">about the author</a>]
+[<a href="e-think.html" target="TTFrame">what do you think ?</a>]
+</font>
+</td>
+</table>
+<div style="margin:10px 0px 10px;"><span style="font-size:smaller;">Copyright 1996-97 <a href="http://www.jochen-froehlich.de/" target="_top" title="Go to the web site of Jochen Fröhlich">Jochen Fr&ouml;hlich</a>. All rights reserved. A <a href="http://www.nnwj.de/" target="_top" title="Go to the new web site of Neural Networks with Java">new version</a> is available.</span></div>
+</center>
+
+</body>
+</HTML>
