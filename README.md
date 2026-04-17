@@ -38,6 +38,24 @@ javac -cp jfroehl/zip/nnwj-applet.zip tools/KFM3DHost.java
 java -cp jfroehl/zip/nnwj-applet.zip:tools KFM3DHost
 ```
 
+### Windows Notes (`cmd.exe` / PowerShell)
+
+On Windows, use `;` as the classpath separator (not `:`).
+
+`cmd.exe`:
+
+```bat
+javac -cp jfroehl\zip\nnwj-applet.zip tools\KFM3DHost.java
+java -cp ".;tools;jfroehl\zip\nnwj-applet.zip" KFM3DHost
+```
+
+PowerShell:
+
+```powershell
+javac -cp jfroehl\zip\nnwj-applet.zip tools\KFM3DHost.java
+java -cp '.;tools;jfroehl\zip\nnwj-applet.zip' KFM3DHost
+```
+
 If you have multiple Java versions installed, you can run explicitly with Java 8:
 
 ```bash
