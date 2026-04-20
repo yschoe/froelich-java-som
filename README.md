@@ -3,8 +3,10 @@ Neural Networks with Java, by Jochen Froehlich (Copyright 1996-1997, All Rights 
 - [Initial version (wayback machine)](https://web.archive.org/web/19991013082458/http://rfhs8012.fh-regensburg.de/~saj39122/jfroehl/diplom/e-index.html)
 - [2004 edition](https://nnwj.de/)
 
-Porting to Python using ChatGPT Codex, by Yoonsuck Choe (The Unlicense)
-
+Porting to Python using ChatGPT Codex, by Yoonsuck Choe (The Unlicense). 
+- Java 8 officially supported
+- Up to Java 17 tested
+- ***New***: See the ***Experimental*** section at the end for Java 21.
 
 ## KFM3D (Kohonen Applet) Setup And Run
 
