@@ -76,3 +76,11 @@ If you have multiple Java versions installed, you can run explicitly with Java 8
 4. Diagnosed Java 21 incompatibility (`Thread.stop()` throws `UnsupportedOperationException`), which prevented reset/parameter behavior.
 
 5. Switched runtime to Java 8 and fixed host compatibility with Java 8 APIs, resulting in fully working KFM3D behavior.
+
+## Experimental
+
+Java 21 is now supported. 
+- Instead of `jfroehl/zip/nnwj-applet.zip`, use `jfroehl/zip/nnwj-applet-patched.zip`. 
+- The patched zip was created using `tools/patchclass.py` (unzip, and patch the `KFM3D.class` file to replace `Thread.stop()` with `Thread.interrupt()`. 
+- This is a temporary fix.
+
