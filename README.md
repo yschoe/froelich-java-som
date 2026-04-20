@@ -1,5 +1,7 @@
 # forelich-java-som
 Neural Networks with Java, by Jochen Froehlich (Copyright 1996-1997, All Rights Reserved)
+- [Initial version (wayback machine)](https://web.archive.org/web/19991013082458/http://rfhs8012.fh-regensburg.de/~saj39122/jfroehl/diplom/e-index.html)
+- [2004 edition](https://nnwj.de/)
 
 Porting to Python using ChatGPT Codex, by Yoonsuck Choe (The Unlicense)
 
@@ -81,6 +83,6 @@ If you have multiple Java versions installed, you can run explicitly with Java 8
 
 Java 21 is now supported. 
 - Instead of `jfroehl/zip/nnwj-applet.zip`, use `jfroehl/zip/nnwj-applet-patched.zip`. 
-- The patched zip was created using `tools/patchclass.py` (unzip, and patch the `KFM3D.class` file to replace `Thread.stop()` with `Thread.interrupt()`. 
+- The patched zip was created using `tools/patchclass.py` (unzip, and patch the `KFM3D.class` file to replace `Thread.stop()` with `Thread.interrupt()`, the zip). 
 - This is a temporary fix.
 
