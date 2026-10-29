@@ -3,12 +3,18 @@ import java.applet.AppletContext;
 import java.applet.AppletStub;
 import java.applet.AudioClip;
 import java.awt.BorderLayout;
+import java.awt.AWTEvent;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -17,6 +23,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,6 +34,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * Run from the repository root with:
  *   java -cp jfroehl/zip/nnwj-applet.zip tools/KFM3DHost.java
+ * Add --font-scale 1.5 to enlarge text and windows by 50 percent.
  */
 public final class KFM3DHost {
     private static final int APPLET_WIDTH = 400;
@@ -38,6 +46,19 @@ public final class KFM3DHost {
     }
 
     public static void main(String[] args) throws Exception {
+        final double fontScale;
+        if (args.length == 1 && ("--help".equals(args[0]) || "-h".equals(args[0]))) {
+            System.out.println("Usage: KFM3DHost [--font-scale FACTOR] (0.5 to 4.0; default 1.0)");
+            return;
+        }
+        try {
+            fontScale = parseFontScale(args);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            System.err.println("Usage: KFM3DHost [--font-scale FACTOR] (0.5 to 4.0)");
+            System.exit(2);
+            return;
+        }
         final URL codeBase = defaultCodeBase();
         final URL docBase = codeBase;
         final Map<String, String> params = new LinkedHashMap<>();
@@ -65,14 +86,28 @@ public final class KFM3DHost {
 
         EventQueue.invokeAndWait(() -> {
             try {
-                launch(codeBase, docBase, params);
+                launch(codeBase, docBase, params, fontScale);
             } catch (Throwable t) {
                 throw new RuntimeException(t);
             }
         });
     }
 
-    private static void launch(URL codeBase, URL docBase, Map<String, String> params) throws Exception {
+    private static double parseFontScale(String[] args) {
+        if (args.length == 0) {
+            return 1.0;
+        }
+        if (args.length != 2 || !"--font-scale".equals(args[0])) {
+            throw new IllegalArgumentException("Expected --font-scale followed by a number.");
+        }
+        double scale = Double.parseDouble(args[1]);
+        if (!Double.isFinite(scale) || scale < 0.5 || scale > 4.0) {
+            throw new IllegalArgumentException("Font scale must be between 0.5 and 4.0.");
+        }
+        return scale;
+    }
+
+    private static void launch(URL codeBase, URL docBase, Map<String, String> params, double fontScale) throws Exception {
         final Applet applet = (Applet) Class.forName("KFM3D").getDeclaredConstructor().newInstance();
         final Frame frame = new Frame("3D Kohonen Feature Map (KFM3D)");
         final Label status = new Label("Status: starting...");
@@ -97,12 +132,64 @@ public final class KFM3DHost {
             }
         });
 
+        // ParametersFrame is a separate, unowned legacy window and may be created later.
+        final Map<Window, Boolean> scaledWindows = new java.util.WeakHashMap<>();
+        if (fontScale != 1.0) {
+            Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
+                if (event.getID() == WindowEvent.WINDOW_OPENED) {
+                    Window window = ((WindowEvent) event).getWindow();
+                    if ("ParametersFrame".equals(window.getClass().getName())) {
+                        EventQueue.invokeLater(() -> scaleWindowOnce(window, fontScale, scaledWindows));
+                    }
+                }
+            }, AWTEvent.WINDOW_EVENT_MASK);
+        }
+
         frame.setVisible(true);
         applet.init();
+        if (fontScale != 1.0) {
+            scaleWindowOnce(frame, fontScale, scaledWindows);
+            for (Window window : Window.getWindows()) {
+                if ("ParametersFrame".equals(window.getClass().getName())) {
+                    scaleWindowOnce(window, fontScale, scaledWindows);
+                }
+            }
+        }
         applet.validate();
         Toolkit.getDefaultToolkit().sync();
         applet.start();
         context.showStatus("running");
+    }
+
+    private static void scaleWindowOnce(Window window, double scale, Map<Window, Boolean> scaled) {
+        if (scaled.put(window, Boolean.TRUE) != null) {
+            return;
+        }
+        // Capture inherited fonts before changing parents, avoiding compounded scaling.
+        Map<Component, Font> fonts = new IdentityHashMap<>();
+        collectFonts(window, fonts);
+        for (Map.Entry<Component, Font> entry : fonts.entrySet()) {
+            Font font = entry.getValue();
+            entry.getKey().setFont(font.deriveFont((float) (font.getSize2D() * scale)));
+        }
+        Dimension original = window.getSize();
+        window.invalidate();
+        Dimension preferred = window.getPreferredSize();
+        window.setSize(Math.max((int) Math.ceil(original.width * scale), preferred.width),
+                Math.max((int) Math.ceil(original.height * scale), preferred.height));
+        window.validate();
+    }
+
+    private static void collectFonts(Component component, Map<Component, Font> fonts) {
+        Font font = component.getFont();
+        if (font != null) {
+            fonts.put(component, font);
+        }
+        if (component instanceof Container) {
+            for (Component child : ((Container) component).getComponents()) {
+                collectFonts(child, fonts);
+            }
+        }
     }
 
     private static URL defaultCodeBase() throws Exception {

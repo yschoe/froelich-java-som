@@ -1,4 +1,6 @@
 # forelich-java-som
+
+Edited by ChatGPT Codex (GPT-6).
 Neural Networks with Java, by Jochen Froehlich (Copyright 1996-1997, All Rights Reserved)
 - [Initial version (wayback machine)](https://web.archive.org/web/19991013082458/http://rfhs8012.fh-regensburg.de/~saj39122/jfroehl/diplom/e-index.html)
 - [2004 edition](https://nnwj.de/)
@@ -41,6 +43,17 @@ javac -cp jfroehl/zip/nnwj-applet.zip tools/KFM3DHost.java
 ```bash
 java -cp jfroehl/zip/nnwj-applet.zip:tools KFM3DHost
 ```
+
+### Larger fonts
+
+Add `--font-scale 1.5` for 50% larger fonts and windows (default: `1.0`, range: `0.5` to `4.0`):
+
+```bash
+javac -cp jfroehl/zip/nnwj-applet.zip tools/KFM3DHost.java
+java -cp jfroehl/zip/nnwj-applet.zip:tools KFM3DHost --font-scale 1.5
+```
+
+This also scales the parameters window and preserves bold text. The same argument works with `nnwj-applet-patched.zip`. Use `--help` for usage.
 
 ### Windows Notes (`cmd.exe` / PowerShell)
 
