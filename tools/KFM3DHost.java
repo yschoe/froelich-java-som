@@ -10,6 +10,14 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.Canvas;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.lang.reflect.Field;
+import java.io.ByteArrayOutputStream;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
@@ -35,12 +43,16 @@ import java.util.concurrent.atomic.AtomicReference;
  * Run from the repository root with:
  *   java -cp jfroehl/zip/nnwj-applet.zip tools/KFM3DHost.java
  * Add --font-scale 1.5 to enlarge text and windows by 50 percent.
+ * Add --display-scale 2 with a display-patched ZIP to double visualization size.
  */
 public final class KFM3DHost {
     private static final int APPLET_WIDTH = 400;
     private static final int APPLET_HEIGHT = 500;
     private static final AtomicBoolean THREAD_STOP_WARNING_EMITTED = new AtomicBoolean(false);
     private static final AtomicReference<HostContext> HOST_CONTEXT = new AtomicReference<>();
+    private static double displayScale = 1.0;
+    private static Color displayBackground;
+    private static final String USAGE = "Usage: KFM3DHost [--font-scale FACTOR] [--display-scale FACTOR] (0.5 to 4.0; default 1.0)";
 
     private KFM3DHost() {
     }
@@ -48,14 +60,16 @@ public final class KFM3DHost {
     public static void main(String[] args) throws Exception {
         final double fontScale;
         if (args.length == 1 && ("--help".equals(args[0]) || "-h".equals(args[0]))) {
-            System.out.println("Usage: KFM3DHost [--font-scale FACTOR] (0.5 to 4.0; default 1.0)");
+            System.out.println(USAGE);
             return;
         }
         try {
-            fontScale = parseFontScale(args);
+            Map<String, Double> scales = parseScales(args);
+            fontScale = scales.get("--font-scale");
+            displayScale = scales.get("--display-scale");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            System.err.println("Usage: KFM3DHost [--font-scale FACTOR] (0.5 to 4.0)");
+            System.err.println(USAGE);
             System.exit(2);
             return;
         }
@@ -93,22 +107,99 @@ public final class KFM3DHost {
         });
     }
 
-    private static double parseFontScale(String[] args) {
-        if (args.length == 0) {
-            return 1.0;
+    private static Map<String, Double> parseScales(String[] args) {
+        Map<String, Double> scales = new LinkedHashMap<>();
+        scales.put("--font-scale", 1.0);
+        scales.put("--display-scale", 1.0);
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        for (int i = 0; i < args.length; i += 2) {
+            String option = args[i];
+            if (!scales.containsKey(option) || i + 1 >= args.length || !seen.add(option)) {
+                throw new IllegalArgumentException("Expected each scale option once, followed by a number.");
+            }
+            double scale = Double.parseDouble(args[i + 1]);
+            if (!Double.isFinite(scale) || scale < 0.5 || scale > 4.0) {
+                throw new IllegalArgumentException(option + " must be between 0.5 and 4.0.");
+            }
+            scales.put(option, scale);
         }
-        if (args.length != 2 || !"--font-scale".equals(args[0])) {
-            throw new IllegalArgumentException("Expected --font-scale followed by a number.");
+        return scales;
+    }
+
+    // Called by patched KFM3D.draw(): scale primitives before rasterization.
+    public static Graphics displayGraphics(Image image) {
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        if (displayScale != 1.0) {
+            int width = image.getWidth(null);
+            int height = image.getHeight(null);
+            graphics.setColor(displayBackground);
+            graphics.fillRect(0, 0, width, height);
+            graphics.translate(width / 2.0, height / 2.0);
+            graphics.scale(displayScale, displayScale);
+            graphics.translate(-width / 2.0, -height / 2.0);
         }
-        double scale = Double.parseDouble(args[1]);
-        if (!Double.isFinite(scale) || scale < 0.5 || scale > 4.0) {
-            throw new IllegalArgumentException("Font scale must be between 0.5 and 4.0.");
+        return graphics;
+    }
+
+    private static Field appletField(Applet applet, String name) throws Exception {
+        Field field = applet.getClass().getDeclaredField(name);
+        field.setAccessible(true);
+        return field;
+    }
+
+    private static void requireDisplayPatch(Class<?> appletClass) throws Exception {
+        try (InputStream input = appletClass.getResourceAsStream("/KFM3D.class")) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int count;
+            while (input != null && (count = input.read(buffer)) != -1) {
+                bytes.write(buffer, 0, count);
+            }
+            if (!new String(bytes.toByteArray(), "ISO-8859-1").contains("displayGraphics")) {
+                throw new IllegalArgumentException("--display-scale requires nnwj-applet-display.zip or "
+                        + "nnwj-applet-patched-display.zip. Run python3 tools/patch_display.py.");
+            }
         }
-        return scale;
+    }
+
+    private static void refreshDisplay(Applet applet, Canvas canvas) throws Exception {
+        synchronized (applet) {
+            Dimension size = canvas.getSize();
+            if (size.width <= 0 || size.height <= 0) {
+                return;
+            }
+            Field dimension = appletField(applet, "d");
+            Dimension old = (Dimension) dimension.get(applet);
+            Object projection = appletField(applet, "td").get(applet);
+            if (projection == null || size.equals(old)) {
+                return;
+            }
+            Image image = canvas.createImage(size.width + 1, size.height + 1);
+            if (image == null) {
+                return;
+            }
+            Image previous = (Image) appletField(applet, "offscreen").get(applet);
+            dimension.set(applet, size);
+            appletField(applet, "offscreen").set(applet, image);
+            for (String axis : new String[] {"midX", "midY"}) {
+                Field center = projection.getClass().getDeclaredField(axis);
+                center.setAccessible(true);
+                center.setInt(projection, (("midX".equals(axis) ? size.width : size.height) + 1) / 2);
+            }
+            applet.getClass().getMethod("draw").invoke(applet);
+            if (previous != null) {
+                previous.flush();
+            }
+        }
     }
 
     private static void launch(URL codeBase, URL docBase, Map<String, String> params, double fontScale) throws Exception {
-        final Applet applet = (Applet) Class.forName("KFM3D").getDeclaredConstructor().newInstance();
+        Class<?> appletClass = Class.forName("KFM3D");
+        if (displayScale != 1.0) {
+            requireDisplayPatch(appletClass);
+        }
+        final Applet applet = (Applet) appletClass.getDeclaredConstructor().newInstance();
+        displayBackground = (Color) appletField(applet, "sandColor").get(applet);
         final Frame frame = new Frame("3D Kohonen Feature Map (KFM3D)");
         final Label status = new Label("Status: starting...");
 
@@ -154,6 +245,24 @@ public final class KFM3DHost {
                     scaleWindowOnce(window, fontScale, scaledWindows);
                 }
             }
+        }
+        if (displayScale != 1.0) {
+            frame.validate();
+            Canvas canvas = (Canvas) appletField(applet, "drawCanvas").get(applet);
+            Dimension size = canvas.getSize();
+            frame.setSize(frame.getWidth() + (int) Math.ceil(size.width * (displayScale - 1.0)),
+                    frame.getHeight() + (int) Math.ceil(size.height * (displayScale - 1.0)));
+            frame.validate();
+            canvas.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent event) {
+                    try {
+                        refreshDisplay(applet, canvas);
+                    } catch (Exception error) {
+                        throw new IllegalStateException("Could not resize the display buffer", error);
+                    }
+                }
+            });
         }
         applet.validate();
         Toolkit.getDefaultToolkit().sync();

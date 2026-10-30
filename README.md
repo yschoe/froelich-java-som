@@ -55,6 +55,41 @@ java -cp jfroehl/zip/nnwj-applet.zip:tools KFM3DHost --font-scale 1.5
 
 This also scales the parameters window and preserves bold text. The same argument works with `nnwj-applet-patched.zip`. Use `--help` for usage.
 
+### Larger visualization
+
+Use `--display-scale` to enlarge the map geometry, input markers, and lines independently of fonts. Both scale options default to `1.0` and accept `0.5` through `4.0`.
+
+The display option requires a rendering-patched archive and the updated host. Generate the two archives with:
+
+```bash
+python3 tools/patch_display.py
+```
+
+This creates `jfroehl/zip/nnwj-applet-display.zip` from the original applet and `jfroehl/zip/nnwj-applet-patched-display.zip` from the Java 21 compatibility version. The input ZIPs are preserved. The display-patched classes call a rendering helper in `KFM3DHost` and require that host on the classpath.
+
+Compile into `java/`, then run with both options:
+
+```bash
+javac -source 8 -target 8 -d java tools/KFM3DHost.java
+java -cp jfroehl/zip/nnwj-applet-patched-display.zip:java KFM3DHost --font-scale 1.5 --display-scale 2
+```
+
+On this machine, the compiler executable is absent; use its installed Java 21 module instead:
+
+```bash
+/usr/lib/jvm/java-21-openjdk-amd64/bin/java com.sun.tools.javac.Main -source 8 -target 8 -d java tools/KFM3DHost.java
+```
+
+Display scaling transforms drawing primitives before rasterization, preserving simulation inputs and learning parameters. It expands the canvas at startup and refreshes the rendering buffer and projection center on subsequent window resizing. Reset and parameter changes retain the selected scale. Very small manually resized windows can still clip the map.
+
+Rendering integration checks (requires a graphical display):
+
+```bash
+mkdir -p scratch
+javac -source 8 -target 8 -cp java -d scratch tools/DisplayScaleCheck.java
+java -cp java:scratch:jfroehl/zip/nnwj-applet-patched-display.zip DisplayScaleCheck --font-scale 1.5 --display-scale 2
+```
+
 ### Windows Notes (`cmd.exe` / PowerShell)
 
 On Windows, use `;` as the classpath separator (not `:`).
